@@ -15,6 +15,9 @@
 		A9BA86AA20C2475000F34166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9BA86A820C2475000F34166 /* LaunchScreen.storyboard */; };
 		A9CDEFEE20C269F100D0E8F0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A9CDEFED20C269F000D0E8F0 /* Podfile */; };
 		C043F39B20C44B29006BA9CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */; };
+		C0F5140420C7D94A00A57B75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5140320C7D94A00A57B75 /* User.swift */; };
+		C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */; };
+		C0F5140820C7ECB900A57B75 /* ListFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5140720C7ECB900A57B75 /* ListFriendController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		A9CDEFEC20C267EC00D0E8F0 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A9CDEFED20C269F000D0E8F0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0F5140320C7D94A00A57B75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleChooseImage.swift; sourceTree = "<group>"; };
+		C0F5140720C7ECB900A57B75 /* ListFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFriendController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +91,9 @@
 		A9BA869E20C2474E00F34166 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				C0F5140220C7CEC700A57B75 /* Models */,
+				C0F5140120C7CEB700A57B75 /* Controllers */,
 				A9BA869F20C2474E00F34166 /* AppDelegate.swift */,
-				A9BA86A120C2474E00F34166 /* ViewController.swift */,
 				A9BA86A320C2474F00F34166 /* Main.storyboard */,
 				A9BA86A620C2475000F34166 /* Assets.xcassets */,
 				A9BA86A820C2475000F34166 /* LaunchScreen.storyboard */,
@@ -94,6 +101,24 @@
 				A9BA86AB20C2475000F34166 /* Info.plist */,
 			);
 			path = FireChat;
+			sourceTree = "<group>";
+		};
+		C0F5140120C7CEB700A57B75 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9BA86A120C2474E00F34166 /* ViewController.swift */,
+				C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */,
+				C0F5140720C7ECB900A57B75 /* ListFriendController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C0F5140220C7CEC700A57B75 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0F5140320C7D94A00A57B75 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,7 +247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9BA86A220C2474E00F34166 /* ViewController.swift in Sources */,
+				C0F5140820C7ECB900A57B75 /* ListFriendController.swift in Sources */,
 				A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */,
+				C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */,
+				C0F5140420C7D94A00A57B75 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

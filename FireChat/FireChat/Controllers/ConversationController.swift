@@ -22,7 +22,7 @@ class ConversationController: UIViewController {
     @IBOutlet weak var conversationTableView: UITableView!
     
     private lazy var conversationReference: DatabaseReference =
-        Constants.refs.databaseUsers.child("/\(Auth.auth().currentUser?.uid)/conversations")
+        Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/conversations")
     private var coversationReferenceHandle: DatabaseHandle? = nil
     
     private var Conversations: [Conversation] = []
@@ -30,6 +30,8 @@ class ConversationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("Current user: \((Auth.auth().currentUser?.uid)!)")
+        
         self.observeConversations()
     }
 
@@ -65,7 +67,7 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.conversationTableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath)
         cell.textLabel?.text = self.Conversations[indexPath.row].name
         return cell
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension LoginController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @objc func handleChooseImage() {
         print("handle choose image")

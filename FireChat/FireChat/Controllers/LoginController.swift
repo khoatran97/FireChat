@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
-class ViewController: UIViewController {
+class LoginController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var textfield_Name: UITextField!
@@ -147,7 +147,7 @@ class ViewController: UIViewController {
             print("Sign in successfully")
             self.textfiel_EmailLogin.text = ""
             self.textfield_PasswordLogin.text = ""
-            self.performSegue(withIdentifier: "segueToTableVC", sender: self)
+            self.performSegue(withIdentifier: "segueToMain", sender: self)
         }
         
     }

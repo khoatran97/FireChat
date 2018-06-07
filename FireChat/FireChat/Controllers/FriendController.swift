@@ -72,15 +72,20 @@ extension FriendController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserCell
         cell.name.text = self.Friends[indexPath.row].friendName
         
+        // To wait for the result of Observe Function
         var dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
+        
         DispatchQueue.global(qos: .default).async {
             Constants.refs.databaseUsers.child("/\((self.Friends[indexPath.row].id)!)/profileImageUrl").observe(.value, with: {snap in
                 
+                // get url of user avatar
                 let imageUrl = snap.value
                 if let imageUrl = imageUrl{
                     let storage = Storage.storage()
                     let ref = storage.reference(forURL: imageUrl as! String)
+                    
+                    // Download the avatar from firebase storage
                     ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
                         if (error != nil) {
                             print("Can not load avatar. Error: \(error!)")
@@ -99,30 +104,44 @@ extension FriendController: UITableViewDelegate, UITableViewDataSource {
                     dispatchGroup.leave()
                 }
             })}
+        
+        // Wait until the observe finishes
         dispatchGroup.wait(timeout: .init(uptimeNanoseconds: 2000000000))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Check if the conversation with the user clicked is exist
         Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/conversations").queryOrdered(byChild: "receiverId").queryEqual(toValue: (Friends[indexPath.row].id)!).observe(.value, with: { (snapshot) in
+            
+            // If exist
             if snapshot.exists() {
-                /*print(snapshot)
-                let conversationData = snapshot.children as! Dictionary<String, AnyObject>
-                let id = snapshot.key
-                if let receiverId = conversationData["receiverId"] as! String!, receiverId.characters.count > 0 {
-                    let receiverName = conversationData["receiverName"] as! String!
-                    self.performSegue(withIdentifier: "segueFriendToChat", sender: self)
-                    self.conversationDelegate?.SetChatView(conversation: Conversation(id: id, receiverId: receiverId, receiverName: receiverName))
-                }*/
+                
+                // Get the conversation information
+                let conversationData = snapshot.value! as! [String: [String: AnyObject]]
+                let id = (conversationData.first?.key)!
+                let receiverId = (conversationData.first?.value as [String: AnyObject]!)["receiverId"]!
+                let receiverName = (conversationData.first?.value as [String: AnyObject]!)["receiverName"]!
+                
+                // Show the chat view with the information as parameter
+                self.performSegue(withIdentifier: "segueFriendToChat", sender: self)
+                self.conversationDelegate?.SetChatView(conversation: Conversation(id: id, receiverId: receiverId as? String, receiverName: receiverName as? String))
             }
             else {
-                let newConversation = Constants.refs.databaseConversations.childByAutoId()
+                // Create new conversation
+                let key = Constants.refs.databaseConversations.childByAutoId().key
                 
-                //
-                Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/conversations/\(newConversation.key)").updateChildValues(["receiverId": (self.Friends[indexPath.row].id)!, "receiverName": (self.Friends[indexPath.row].friendName)!])
+                // Reference to the new conversation in conversations node of current user
+                Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/conversations/\(key)").updateChildValues(["receiverId": (self.Friends[indexPath.row].id)!, "receiverName": (self.Friends[indexPath.row].friendName)!])
                 
-                //
-                Constants.refs.databaseUsers.child("/\((self.Friends[indexPath.row].id)!)/conversations/\(newConversation.key)").updateChildValues(["receiverId": (Auth.auth().currentUser?.uid)!, "receiverName": (Auth.auth().currentUser?.displayName)!])
+                // Reference to the new conversation in conversations node of the second user
+                Constants.refs.databaseUsers.child("/\((self.Friends[indexPath.row].id)!)/conversations/\(key)").updateChildValues(["receiverId": (Auth.auth().currentUser?.uid)!, "receiverName": (Auth.auth().currentUser?.displayName)!])
+                
+                // Get the information of the new conversation
+                let receiverId = (self.Friends[indexPath.row].id)!
+                let receiverName = (self.Friends[indexPath.row].friendName)!
+                
             }
         })
     }

@@ -13,6 +13,8 @@
 		A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */; };
 		A90E58F220C9029300C2DEBE /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F120C9029300C2DEBE /* ConversationCell.swift */; };
 		A90E58F420C9282500C2DEBE /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F320C9282500C2DEBE /* FriendController.swift */; };
+		A90E58F620C9296300C2DEBE /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F520C9296300C2DEBE /* Friend.swift */; };
+		A90E58F820C92B0C00C2DEBE /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F720C92B0C00C2DEBE /* UserCell.swift */; };
 		A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF98E20C823350006CF37 /* ConversationController.swift */; };
 		A91FF99120C824020006CF37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF99020C824020006CF37 /* Constants.swift */; };
 		A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA869F20C2474E00F34166 /* AppDelegate.swift */; };
@@ -35,6 +37,8 @@
 		A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		A90E58F120C9029300C2DEBE /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		A90E58F320C9282500C2DEBE /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
+		A90E58F520C9296300C2DEBE /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A90E58F720C92B0C00C2DEBE /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		A91FF98E20C823350006CF37 /* ConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationController.swift; sourceTree = "<group>"; };
 		A91FF99020C824020006CF37 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A9BA869C20C2474E00F34166 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +138,7 @@
 				A90E58EA20C8CC8400C2DEBE /* ChatController.swift */,
 				A90E58F120C9029300C2DEBE /* ConversationCell.swift */,
 				A90E58F320C9282500C2DEBE /* FriendController.swift */,
+				A90E58F720C92B0C00C2DEBE /* UserCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 			children = (
 				C0F5140320C7D94A00A57B75 /* User.swift */,
 				A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */,
+				A90E58F520C9296300C2DEBE /* Friend.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,8 +279,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9BA86A220C2474E00F34166 /* LoginController.swift in Sources */,
+				A90E58F820C92B0C00C2DEBE /* UserCell.swift in Sources */,
 				A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */,
 				A90E58EE20C8E91800C2DEBE /* ConversationProtocol.swift in Sources */,
+				A90E58F620C9296300C2DEBE /* Friend.swift in Sources */,
 				A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */,
 				A90E58F220C9029300C2DEBE /* ConversationCell.swift in Sources */,
 				A90E58EB20C8CC8400C2DEBE /* ChatController.swift in Sources */,

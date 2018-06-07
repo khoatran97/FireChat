@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -380,24 +381,79 @@
             </objects>
             <point key="canvasLocation" x="1441" y="-182"/>
         </scene>
-        <!--View Controller-->
+        <!--Friend Controller-->
         <scene sceneID="7zL-iA-ei3">
             <objects>
-                <viewController id="zwb-7C-DZ2" sceneMemberID="viewController">
+                <viewController id="zwb-7C-DZ2" customClass="FriendController" customModule="FireChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wv7-4u-emI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sDO-ie-ypm">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="60" id="JGu-ec-JsM" customClass="UserCell" customModule="FireChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JGu-ec-JsM" id="fhz-DT-My6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1rL-Wh-y9R">
+                                                    <rect key="frame" x="15" y="11" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="1rL-Wh-y9R" secondAttribute="height" multiplier="1:1" id="abg-YW-Z9a"/>
+                                                        <constraint firstAttribute="height" constant="38" id="bFd-GB-APp"/>
+                                                        <constraint firstAttribute="width" constant="38" id="pAh-hv-2wc"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ng-77-IMx">
+                                                    <rect key="frame" x="71" y="20" width="289" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2ng-77-IMx" firstAttribute="leading" secondItem="1rL-Wh-y9R" secondAttribute="trailing" constant="18" id="G9u-wV-Gab"/>
+                                                <constraint firstItem="1rL-Wh-y9R" firstAttribute="leading" secondItem="fhz-DT-My6" secondAttribute="leadingMargin" id="Icq-yQ-nwh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2ng-77-IMx" secondAttribute="trailing" id="fV3-Iy-TPQ"/>
+                                                <constraint firstItem="1rL-Wh-y9R" firstAttribute="bottom" secondItem="fhz-DT-My6" secondAttribute="bottomMargin" id="hVg-Bk-2eW"/>
+                                                <constraint firstItem="2ng-77-IMx" firstAttribute="centerY" secondItem="1rL-Wh-y9R" secondAttribute="centerY" id="zJx-Az-zPD"/>
+                                                <constraint firstItem="1rL-Wh-y9R" firstAttribute="top" secondItem="fhz-DT-My6" secondAttribute="topMargin" id="zyU-tL-lE2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatar" destination="1rL-Wh-y9R" id="MEJ-Do-pE3"/>
+                                            <outlet property="name" destination="2ng-77-IMx" id="8kw-Ga-Hcb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zwb-7C-DZ2" id="PCn-K8-bRC"/>
+                                    <outlet property="delegate" destination="zwb-7C-DZ2" id="S73-b9-9Sk"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sDO-ie-ypm" firstAttribute="leading" secondItem="Obc-ah-f1o" secondAttribute="leading" id="0U4-B6-KRa"/>
+                            <constraint firstItem="Obc-ah-f1o" firstAttribute="trailing" secondItem="sDO-ie-ypm" secondAttribute="trailing" id="7lh-2e-uTa"/>
+                            <constraint firstItem="Obc-ah-f1o" firstAttribute="bottom" secondItem="sDO-ie-ypm" secondAttribute="bottom" id="Cpt-Lu-0XB"/>
+                            <constraint firstItem="sDO-ie-ypm" firstAttribute="top" secondItem="Obc-ah-f1o" secondAttribute="top" id="KkQ-Z9-WuV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Obc-ah-f1o"/>
                     </view>
                     <navigationItem key="navigationItem" id="oIo-ZV-2xj"/>
                     <connections>
+                        <outlet property="friendTableView" destination="sDO-ie-ypm" id="arm-fo-Utp"/>
                         <segue destination="fB9-DS-ZPI" kind="show" identifier="segueFriendToChat" id="LmI-dm-WDE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="atp-Mz-SvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2238" y="666"/>
+            <point key="canvasLocation" x="2237.5999999999999" y="665.21739130434787"/>
         </scene>
         <!--Friends-->
         <scene sceneID="J1S-jd-nR6">

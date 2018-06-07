@@ -366,7 +366,7 @@
         <scene sceneID="a1s-ys-peH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bEl-8c-LUo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Conversations" id="MVA-Xu-Skr"/>
+                    <tabBarItem key="tabBarItem" title="Conversations" image="conversation" selectedImage="conversation" id="MVA-Xu-Skr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jll-OE-Hcf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -459,7 +459,7 @@
         <scene sceneID="J1S-jd-nR6">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0v6-My-Ucp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" id="2ph-qd-n5P"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friends" selectedImage="friends" id="2ph-qd-n5P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vsH-xq-wf9">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -476,6 +476,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="conversation" width="32" height="32"/>
+        <image name="friends" width="32" height="32"/>
         <image name="userAvatar" width="96" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>

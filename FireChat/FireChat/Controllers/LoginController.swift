@@ -75,7 +75,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            print("save to Authencation successfully")
+            print("Save to Authencation successfully")
             
             let uid = user?.user.uid
             
@@ -89,13 +89,28 @@ class LoginController: UIViewController {
                         print(err as Any)
                         return
                     }
-                    print("save to storage successfully")
+                    print("Save user avatar to storage successfully")
                     storeRef.downloadURL(completion: { (url, err) in
                         let profileImageUrl = url?.absoluteString
                         let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl] as [String: AnyObject]
                         
+                        if let user = user?.user {
+                            let changeRequest = user.createProfileChangeRequest()
+                            changeRequest.displayName = name
+                            changeRequest.photoURL = NSURL(string: profileImageUrl!)! as URL
+                            
+                            changeRequest.commitChanges(completion: {error in
+                                if error == nil {
+                                    print("User information is changed")
+                                }
+                                else {
+                                    print("Can not change user information")
+                                }
+                            })
+                        }
+                        
                         //save into database with uid
-                        print("save data into database with uid")
+                        print("Save data into database with uid")
                         self.registerIntoDatabaseWithUid(uid: uid!, values: values)
                     })
                     
@@ -174,6 +189,12 @@ class LoginController: UIViewController {
             print("default")
         }
     }
-    
+}
+
+extension LoginController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 

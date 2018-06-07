@@ -10,13 +10,6 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-struct Conversation {
-    var id: String? = nil
-    var name: String? = nil
-    var user: String? = nil
-    var conversationId: String? = nil
-}
-
 class ConversationController: UIViewController {
 
     @IBOutlet weak var conversationTableView: UITableView!
@@ -26,6 +19,8 @@ class ConversationController: UIViewController {
     private var coversationReferenceHandle: DatabaseHandle? = nil
     
     private var Conversations: [Conversation] = []
+    
+    var conversationDelegate: ConversationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +35,18 @@ class ConversationController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var chatView = segue.destination as! ChatController
+        self.conversationDelegate = chatView
+    }
+    
     private func observeConversations() {
         coversationReferenceHandle = conversationReference.observe(.childAdded, with: { (snapshot) -> Void in
             let conversationData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
-            if let name = conversationData["name"] as! String!, name.characters.count > 0 {
-                let conversationId = conversationData["conversationId"] as! String!
-                let user = conversationData["user"] as! String!
-                self.Conversations.append(Conversation(id: id, name: name, user: user, conversationId: conversationId))
+            if let receiverId = conversationData["receiverId"] as! String!, receiverId.characters.count > 0 {
+                let receiverName = conversationData["receiverName"] as! String!
+                self.Conversations.append(Conversation(id: id, receiverId: receiverId, receiverName:receiverName))
                 self.conversationTableView.reloadData()
             } else {
                 print("Error! Could not decode conversation data")
@@ -68,7 +67,12 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath)
-        cell.textLabel?.text = self.Conversations[indexPath.row].name
+        cell.textLabel?.text = self.Conversations[indexPath.row].receiverName
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.conversationDelegate?.SetConversationId(Conversations[indexPath.row])
+        self.performSegue(withIdentifier: "segueToChat", sender: self)
     }
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		280893EF51D868B5AF91166C /* Pods_FireChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809A317505901FEF51017CAD /* Pods_FireChat.framework */; };
+		A90E58EB20C8CC8400C2DEBE /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58EA20C8CC8400C2DEBE /* ChatController.swift */; };
+		A90E58EE20C8E91800C2DEBE /* ConversationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58ED20C8E91800C2DEBE /* ConversationProtocol.swift */; };
+		A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */; };
 		A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF98E20C823350006CF37 /* ConversationController.swift */; };
 		A91FF99120C824020006CF37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF99020C824020006CF37 /* Constants.swift */; };
 		A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA869F20C2474E00F34166 /* AppDelegate.swift */; };
@@ -25,6 +28,9 @@
 		5DA92C0031FD68F4C2A889C8 /* Pods-FireChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.release.xcconfig"; sourceTree = "<group>"; };
 		63C547AEA5C7F272224DB4B6 /* Pods-FireChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.debug.xcconfig"; sourceTree = "<group>"; };
 		809A317505901FEF51017CAD /* Pods_FireChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A90E58EA20C8CC8400C2DEBE /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		A90E58ED20C8E91800C2DEBE /* ConversationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationProtocol.swift; sourceTree = "<group>"; };
+		A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		A91FF98E20C823350006CF37 /* ConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationController.swift; sourceTree = "<group>"; };
 		A91FF99020C824020006CF37 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A9BA869C20C2474E00F34166 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +76,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A90E58EC20C8E8F500C2DEBE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A90E58ED20C8E91800C2DEBE /* ConversationProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		A9BA869320C2474D00F34166 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +108,7 @@
 		A9BA869E20C2474E00F34166 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				A90E58EC20C8E8F500C2DEBE /* Protocols */,
 				C0F5140220C7CEC700A57B75 /* Models */,
 				C0F5140120C7CEB700A57B75 /* Controllers */,
 				A9BA869F20C2474E00F34166 /* AppDelegate.swift */,
@@ -112,6 +127,7 @@
 				A91FF98E20C823350006CF37 /* ConversationController.swift */,
 				A9BA86A120C2474E00F34166 /* LoginController.swift */,
 				C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */,
+				A90E58EA20C8CC8400C2DEBE /* ChatController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -120,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				C0F5140320C7D94A00A57B75 /* User.swift */,
+				A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +268,9 @@
 			files = (
 				A9BA86A220C2474E00F34166 /* LoginController.swift in Sources */,
 				A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */,
+				A90E58EE20C8E91800C2DEBE /* ConversationProtocol.swift in Sources */,
+				A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */,
+				A90E58EB20C8CC8400C2DEBE /* ChatController.swift in Sources */,
 				A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */,
 				C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */,
 				C0F5140420C7D94A00A57B75 /* User.swift in Sources */,

@@ -72,7 +72,7 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.conversationDelegate?.SetConversationId(Conversations[indexPath.row])
         self.performSegue(withIdentifier: "segueToChat", sender: self)
+        self.conversationDelegate?.SetChatView(conversation: Conversations[indexPath.row])
     }
 }

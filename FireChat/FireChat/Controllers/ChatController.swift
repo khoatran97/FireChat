@@ -9,18 +9,22 @@
 import UIKit
 import JSQMessagesViewController
 import FirebaseAuth
+import Firebase
 
 class ChatController: JSQMessagesViewController {
 
     var Messages = [JSQMessage]()
     var conversation: Conversation? = nil
     
+    private lazy var chatReference: DatabaseReference =
+        Constants.refs.databaseConversations.child("/\((self.conversation?.id)!)")
+    
     lazy var outgoingBubble: JSQMessagesBubbleImage = {
         return JSQMessagesBubbleImageFactory()!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
     }()
     
     lazy var incomingBubble: JSQMessagesBubbleImage = {
-        return JSQMessagesBubbleImageFactory()!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+        return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     }()
     
     override func viewDidLoad() {
@@ -35,6 +39,8 @@ class ChatController: JSQMessagesViewController {
         inputToolbar.contentView.leftBarButtonItem = nil
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        
+        self.observeChats()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +62,54 @@ class ChatController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        return Messages[indexPath.row].senderId == self.senderId ? nil : NSAttributedString(string: Messages[indexPath.row].senderDisplayName)
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        return Messages[indexPath.row].senderId == self.senderId ? 0 : 15
+    }
+    
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+        let newMessage = self.chatReference.childByAutoId()
+        let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
+        newMessage.setValue(message)
+        self.finishSendingMessage()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        
+        if (Messages[indexPath.row].senderId == self.senderId) {
+            cell.textView.textColor = UIColor.white
+        }
+        else {
+            cell.textView.textColor = UIColor.black
+        }
+        return cell
+    }
+    
+    private func observeChats() {
+        _ = self.chatReference.queryLimited(toLast: 25)
+        _ = chatReference.observe(.childAdded, with: { (snapshot) -> Void in
+            let chatData = snapshot.value as! Dictionary<String, String>
+            let id = snapshot.key
+            if let senderId = chatData["senderId"] as String!, senderId.characters.count > 0 {
+                let senderName = chatData["senderName"] as String!
+                let message = chatData["message"] as String!
+                
+                if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, text: message) {
+                    self.Messages.append(newMessage)
+                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                    self.finishReceivingMessage()
+                }
+                else {
+                    print("Can not receive new message")
+                }
+            }
+        })
     }
 }
 

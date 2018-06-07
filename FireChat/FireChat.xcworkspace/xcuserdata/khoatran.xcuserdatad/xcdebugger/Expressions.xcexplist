@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ConversationController.tableView(_:cellForRowAt:):ConversationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "snap.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChatController.viewDidLoad():ChatController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ConversationController.tableView(_:cellForRowAt:):ConversationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Conversations">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

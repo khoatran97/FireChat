@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class ConversationController: UIViewController {
 
@@ -40,6 +41,10 @@ class ConversationController: UIViewController {
         self.conversationDelegate = chatView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private func observeConversations() {
         coversationReferenceHandle = conversationReference.observe(.childAdded, with: { (snapshot) -> Void in
             let conversationData = snapshot.value as! Dictionary<String, AnyObject>
@@ -66,13 +71,43 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath)
-        cell.textLabel?.text = self.Conversations[indexPath.row].receiverName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "conversationCell", for: indexPath) as! ConversationCell
+        cell.name.text = self.Conversations[indexPath.row].receiverName
+        cell.message.text = ""
+        
+        var dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        DispatchQueue.global(qos: .default).async {
+        Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/profileImageUrl").observe(.value, with: {snap in
+            
+            let imageUrl = snap.value
+            if let imageUrl = imageUrl{
+                let storage = Storage.storage()
+                let ref = storage.reference(forURL: imageUrl as! String)
+                ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
+                    if (error != nil) {
+                        print("Can not load avatar. Error: \(error!)")
+                        dispatchGroup.leave()
+                    }
+                    else {
+                        cell.avatar.image = UIImage(data: data!)
+                        cell.avatar.layer.cornerRadius = cell.avatar.bounds.width / 2
+                        cell.avatar.layer.masksToBounds = true
+                        dispatchGroup.leave()
+                    }
+                })
+            }
+            else {
+                print("Can not load avatar")
+                dispatchGroup.leave()
+            }
+        })}
+        dispatchGroup.wait(timeout: .init(uptimeNanoseconds: 2000000000))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "segueToChat", sender: self)
+        self.performSegue(withIdentifier: "segueConversationToChat", sender: self)
         self.conversationDelegate?.SetChatView(conversation: Conversations[indexPath.row])
     }
 }

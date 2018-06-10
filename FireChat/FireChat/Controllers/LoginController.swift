@@ -32,6 +32,9 @@ class LoginController: UIViewController {
         //init view
         initView()
         
+        //check login
+        checkLogin()
+        
     }
     
     func initView() {
@@ -59,6 +62,20 @@ class LoginController: UIViewController {
         //view
         viewRegister.layer.cornerRadius = 8
         viewLogin.layer.cornerRadius = 8
+        
+        //textfield
+        textfield_PasswordLogin.isSecureTextEntry = true
+        textfield_Password.isSecureTextEntry = true
+    }
+    
+    //check login
+    func checkLogin() {
+        if Auth.auth().currentUser?.uid == nil {
+            print("Chua login")
+        } else {
+            print("Da login")
+            self.performSegue(withIdentifier: "segueToMain", sender: self)
+        }
     }
     
     @IBAction func btnAction_Register(_ sender: Any) {
@@ -92,7 +109,7 @@ class LoginController: UIViewController {
                     print("Save user avatar to storage successfully")
                     storeRef.downloadURL(completion: { (url, err) in
                         let profileImageUrl = url?.absoluteString
-                        let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl] as [String: AnyObject]
+                        let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl, "imageID": imageName] as [String: AnyObject]
                         
                         if let user = user?.user {
                             let changeRequest = user.createProfileChangeRequest()
@@ -112,6 +129,7 @@ class LoginController: UIViewController {
                         //save into database with uid
                         print("Save data into database with uid")
                         self.registerIntoDatabaseWithUid(uid: uid!, values: values)
+                        self.performSegue(withIdentifier: "segueToMain", sender: self)
                     })
                     
                 })
@@ -156,6 +174,11 @@ class LoginController: UIViewController {
             
             if err != nil {
                 print(err as Any)
+                
+                let alert = UIAlertController(title: "Login failed", message: "Email or password invalid", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
                 return
             }
             

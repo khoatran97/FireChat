@@ -24,6 +24,8 @@
 		A9BA86AA20C2475000F34166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9BA86A820C2475000F34166 /* LaunchScreen.storyboard */; };
 		A9CDEFEE20C269F100D0E8F0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A9CDEFED20C269F000D0E8F0 /* Podfile */; };
 		C043F39B20C44B29006BA9CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */; };
+		C08A622020CA63C8002F676C /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A621F20CA63C8002F676C /* ProfileController.swift */; };
+		C08A622220CA65DC002F676C /* CustomProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A622120CA65DC002F676C /* CustomProfileCell.swift */; };
 		C0F5140420C7D94A00A57B75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5140320C7D94A00A57B75 /* User.swift */; };
 		C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,8 @@
 		A9CDEFEC20C267EC00D0E8F0 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A9CDEFED20C269F000D0E8F0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C08A621F20CA63C8002F676C /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		C08A622120CA65DC002F676C /* CustomProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileCell.swift; sourceTree = "<group>"; };
 		C0F5140320C7D94A00A57B75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C0F5140520C7E00D00A57B75 /* handleChooseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleChooseImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +143,8 @@
 				A90E58F120C9029300C2DEBE /* ConversationCell.swift */,
 				A90E58F320C9282500C2DEBE /* FriendController.swift */,
 				A90E58F720C92B0C00C2DEBE /* UserCell.swift */,
+				C08A621F20CA63C8002F676C /* ProfileController.swift */,
+				C08A622120CA65DC002F676C /* CustomProfileCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,9 +291,11 @@
 				A90E58F620C9296300C2DEBE /* Friend.swift in Sources */,
 				A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */,
 				A90E58F220C9029300C2DEBE /* ConversationCell.swift in Sources */,
+				C08A622020CA63C8002F676C /* ProfileController.swift in Sources */,
 				A90E58EB20C8CC8400C2DEBE /* ChatController.swift in Sources */,
 				A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */,
 				C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */,
+				C08A622220CA65DC002F676C /* CustomProfileCell.swift in Sources */,
 				A90E58F420C9282500C2DEBE /* FriendController.swift in Sources */,
 				C0F5140420C7D94A00A57B75 /* User.swift in Sources */,
 				A91FF99120C824020006CF37 /* Constants.swift in Sources */,

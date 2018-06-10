@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension LoginController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -59,3 +60,103 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
     
     
 }
+
+extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func handleUpdateImage() {
+        //init picker image controller
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        //init alert controller
+        let alert = UIAlertController()
+        
+        alert.addAction(UIAlertAction(title: "Photo", style: .default, handler: { (action) in
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true, completion: nil)
+            
+            print("choose image successfully")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            print("camera")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectImageFromPicker: UIImage?
+        if let editImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            selectImageFromPicker = editImage
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            selectImageFromPicker = originalImage
+        }
+        
+        if let selectImage = selectImageFromPicker {
+            //get imageID
+            let uid = Auth.auth().currentUser?.uid
+            let newImageID = NSUUID().uuidString
+            let storeRef = Storage.storage().reference()
+            let storeRefChild = storeRef.child("\(newImageID).png")
+            let databaseRef = Database.database().reference().child("Users").child(uid!)
+            var imageDeleteID: String?
+            
+            databaseRef.observe(DataEventType.value) { (snapshot) in
+                if let values = snapshot.value as? [String : AnyObject] {
+                    let imageDeleteID = (values["imageID"] as! String)
+                    if imageDeleteID != newImageID {
+                        let imageDelete = storeRef.child("\(imageDeleteID).png")
+                        imageDelete.delete(completion: { (err) in
+                            if err != nil {
+                                print(err as Any)
+                                return
+                            }
+                            
+                            print("Delete successfully")
+                        })
+                    }
+                }
+            }
+
+            
+            
+            if let imageUpload = UIImagePNGRepresentation(selectImage) {
+                storeRefChild.putData(imageUpload, metadata: nil, completion: { (metadata, err) in
+                    if err != nil {
+                        print(err as Any)
+                        return
+                    }
+                    
+                    print("uplaod image successfully")
+                    storeRefChild.downloadURL(completion: { (url, err) in
+                        if err != nil {
+                            print(err as Any)
+                            return
+                        }
+                        let profileImageUrl = url?.absoluteString
+                        guard let values = ["profileImageUrl" : profileImageUrl, "imageID" : newImageID] as? [String : AnyObject] else {
+                            return
+                        }
+                        
+                        databaseRef.updateChildValues(values)
+                    })
+                })
+            }
+            
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+}
+
+
+

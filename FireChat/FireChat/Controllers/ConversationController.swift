@@ -12,8 +12,10 @@ import FirebaseAuth
 import FirebaseStorage
 
 class ConversationController: UIViewController {
-
+    
     @IBOutlet weak var conversationTableView: UITableView!
+    @IBOutlet weak var img_Profile: UIImageView!
+    @IBOutlet weak var lbl_Profile: UILabel!
     
     private lazy var conversationReference: DatabaseReference =
         Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/conversations")
@@ -23,22 +25,75 @@ class ConversationController: UIViewController {
     
     var conversationDelegate: ConversationDelegate?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print("Current user: \((Auth.auth().currentUser?.uid)!)")
+        img_Profile.layer.cornerRadius = img_Profile.frame.height / 2
+        img_Profile.isUserInteractionEnabled = true
+        img_Profile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProfile)))
+        initNavBar()
         
         self.observeConversations()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    //init NavigationBar
+    func initNavBar() {
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
+            if let values = snapshot.value as? [String : AnyObject] {
+                
+                if let imageProfileUrl = values["profileImageUrl"] as? String {
+                    
+                    let url = URL(string: imageProfileUrl)
+                    URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
+                        if err != nil {
+                            print(err as Any)
+                            return
+                        }
+                        print("successfully")
+                        
+                        DispatchQueue.main.async {
+                            if let imageProfile = UIImage(data: data!) {
+                                self.img_Profile.image = imageProfile
+                            }
+                        }
+                    }).resume()
+                }
+            }
+            
+        }
+    }
+    
+    @objc func handleProfile() {
+        self.performSegue(withIdentifier: "toProfileVC", sender: self)
+    }
+    @objc func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+            
+            let alert = UIAlertController(title: "Logout", message: "Successfully", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+        } catch {
+            print("Logout failed")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var chatView = segue.destination as! ChatController
-        self.conversationDelegate = chatView
+        if segue.identifier == "segueConversationToChat" {
+            let chatView = segue.destination as! ChatController
+            self.conversationDelegate = chatView
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,8 +104,8 @@ class ConversationController: UIViewController {
         coversationReferenceHandle = conversationReference.observe(.childAdded, with: { (snapshot) -> Void in
             let conversationData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
-            if let receiverId = conversationData["receiverId"] as! String!, receiverId.characters.count > 0 {
-                let receiverName = conversationData["receiverName"] as! String!
+            if let receiverId = conversationData["receiverId"] as! String?, receiverId.characters.count > 0 {
+                let receiverName = conversationData["receiverName"] as! String?
                 self.Conversations.append(Conversation(id: id, receiverId: receiverId, receiverName:receiverName))
                 self.conversationTableView.reloadData()
             } else {
@@ -75,33 +130,33 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
         cell.name.text = self.Conversations[indexPath.row].receiverName
         cell.message.text = ""
         
-        var dispatchGroup = DispatchGroup()
+        let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         DispatchQueue.global(qos: .default).async {
-        Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/profileImageUrl").observe(.value, with: {snap in
-            
-            let imageUrl = snap.value
-            if let imageUrl = imageUrl{
-                let storage = Storage.storage()
-                let ref = storage.reference(forURL: imageUrl as! String)
-                ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
-                    if (error != nil) {
-                        print("Can not load avatar. Error: \(error!)")
-                        dispatchGroup.leave()
-                    }
-                    else {
-                        cell.avatar.image = UIImage(data: data!)
-                        cell.avatar.layer.cornerRadius = cell.avatar.bounds.width / 2
-                        cell.avatar.layer.masksToBounds = true
-                        dispatchGroup.leave()
-                    }
-                })
-            }
-            else {
-                print("Can not load avatar")
-                dispatchGroup.leave()
-            }
-        })}
+            Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/profileImageUrl").observe(.value, with: {snap in
+                
+                let imageUrl = snap.value
+                if let imageUrl = imageUrl{
+                    let storage = Storage.storage()
+                    let ref = storage.reference(forURL: imageUrl as! String)
+                    ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
+                        if (error != nil) {
+                            print("Can not load avatar. Error: \(error!)")
+                            dispatchGroup.leave()
+                        }
+                        else {
+                            cell.avatar.image = UIImage(data: data!)
+                            cell.avatar.layer.cornerRadius = cell.avatar.bounds.width / 2
+                            cell.avatar.layer.masksToBounds = true
+                            dispatchGroup.leave()
+                        }
+                    })
+                }
+                else {
+                    print("Can not load avatar")
+                    dispatchGroup.leave()
+                }
+            })}
         dispatchGroup.wait(timeout: .init(uptimeNanoseconds: 2000000000))
         return cell
     }

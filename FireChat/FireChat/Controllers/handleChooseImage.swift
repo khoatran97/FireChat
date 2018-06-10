@@ -101,8 +101,7 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
             let storeRef = Storage.storage().reference()
             let storeRefChild = storeRef.child("\(newImageID).png")
             let databaseRef = Database.database().reference().child("Users").child(uid!)
-            var imageDeleteID: String?
-            
+            // find image and delete in storage
             databaseRef.observe(DataEventType.value) { (snapshot) in
                 if let values = snapshot.value as? [String : AnyObject] {
                     let imageDeleteID = (values["imageID"] as! String)
@@ -119,9 +118,7 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
                     }
                 }
             }
-
-            
-            
+            //upload new image to storage and update data to database
             if let imageUpload = UIImagePNGRepresentation(selectImage) {
                 storeRefChild.putData(imageUpload, metadata: nil, completion: { (metadata, err) in
                     if err != nil {
@@ -139,14 +136,12 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
                         guard let values = ["profileImageUrl" : profileImageUrl, "imageID" : newImageID] as? [String : AnyObject] else {
                             return
                         }
-                        
                         databaseRef.updateChildValues(values)
                     })
                 })
             }
             
         }
-        
         picker.dismiss(animated: true, completion: nil)
     }
     

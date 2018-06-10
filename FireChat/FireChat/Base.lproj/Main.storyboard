@@ -352,10 +352,12 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="0e3-Mm-UmJ"/>
                                             <constraint firstAttribute="width" constant="33" id="AGU-Vw-ZSh"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="Qih-UU-22M"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="Riz-7E-vbe"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaK-3c-QaB">
-                                        <rect key="frame" x="41" y="6" width="42" height="20"/>
+                                        <rect key="frame" x="41" y="6" width="42" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -501,6 +503,7 @@
                         <outlet property="img_profile" destination="Idc-sg-Jvy" id="bY4-CR-6wu"/>
                         <outlet property="lbl_EmailProfile" destination="Bku-ns-TdO" id="ZEo-5Z-sD5"/>
                         <outlet property="tableViewProfile" destination="Zjn-6r-192" id="mIS-Fg-wAu"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="segueToLoginVC" id="gaK-cW-x0M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5dL-Fq-Vfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -660,6 +663,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yTk-1b-GTm"/>
-        <segue reference="Pev-RA-iiJ"/>
+        <segue reference="gaK-cW-x0M"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -77,7 +77,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
+        case 0: //edit name
             print("Edit name")
             let alert = UIAlertController(title: "Edit Name", message: "You can input new name at here", preferredStyle: UIAlertControllerStyle.alert)
             
@@ -103,11 +103,88 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         case 2:
             print(2)
             break
-        case 3:
-            print(3)
+        case 3: //change password
+            print("Change password")
+            let alert = UIAlertController(title: "Password", message: "Do you want to change password", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addTextField { (textfield) in
+                textfield.placeholder = "Old password"
+                textfield.isSecureTextEntry = true
+            }
+            alert.addTextField { (textfield) in
+                textfield.placeholder = "New password"
+                textfield.isSecureTextEntry = true
+            }
+            alert.addTextField { (textfield) in
+                textfield.placeholder = "Confirm new password"
+                textfield.isSecureTextEntry = true
+            }
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                //code in here
+                guard let oldPassword = alert.textFields![0].text, let newPassword = alert.textFields![1].text, let confirmNewPassword = alert.textFields![2].text else {
+                    return
+                }
+                
+                let alertNoti = UIAlertController(title: "Change Password", message: "", preferredStyle: UIAlertControllerStyle.alert)
+                
+                if newPassword != confirmNewPassword {
+                    alertNoti.message = "confirm password is wrong!"
+                    alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                    self.present(alertNoti, animated: true, completion: nil)
+                    print("confirm password is wrong!")
+                } else {
+                    //get current user
+                    let user = Auth.auth().currentUser
+                    let currentEmail = user?.email
+                    let currentPassword = oldPassword
+                    let credential = EmailAuthProvider.credential(withEmail: currentEmail!, password: currentPassword)
+                    user?.reauthenticateAndRetrieveData(with: credential, completion: { (authData: AuthDataResult?, err) in
+                        if err != nil {
+                            print(err as Any)
+                            alertNoti.message = "Old password is wrong. Please check again!"
+                            alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                            self.present(alertNoti, animated: true, completion: nil)
+                            return
+                        }
+                        print("check old password successfully")
+                        user?.updatePassword(to: newPassword, completion: { (err) in
+                            if err != nil {
+                                print(err as Any)
+                                alertNoti.message = "New password is invalid. Minimun password is 6 characters"
+                                alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                                self.present(alertNoti, animated: true, completion: nil)
+                                return
+                            }
+                            
+                            alertNoti.message = "Successfully, please log in again with new password"
+                            alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                                self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
+                            }))
+                            self.present(alertNoti, animated: true, completion: nil)
+                        })
+                    })
+                }
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             break
-        case 4:
-            print(4)
+        case 4: //logout
+            //success
+            let alert = UIAlertController(title: "Logout", message: "Do you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                print("Logout")
+                do {
+                    try Auth.auth().signOut()
+                } catch {
+                    print("sign out failed")
+                }
+                print("sign out successfully")
+                self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
         default:
             break
         }

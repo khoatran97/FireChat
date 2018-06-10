@@ -85,10 +85,14 @@ class LoginController: UIViewController {
             return
         }
         
+        let alert = UIAlertController(title: "Register Failed", message: "Email existed or password minimum 6 characters", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         Auth.auth().createUser(withEmail: email, password: password) { (user: AuthDataResult?, err) in
             
             if err != nil {
                 print(err as Any)
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
@@ -104,6 +108,7 @@ class LoginController: UIViewController {
                     
                     if err != nil {
                         print(err as Any)
+                        self.present(alert, animated: true, completion: nil)
                         return
                     }
                     print("Save user avatar to storage successfully")
@@ -142,17 +147,21 @@ class LoginController: UIViewController {
         let ref = Database.database().reference()
         let userRef = ref.child("Users").child(uid)
         
+         let alert = UIAlertController(title: "Register", message: "Register Successfully", preferredStyle: UIAlertControllerStyle.alert)
+        
         userRef.updateChildValues(values) { (err, ref) in
             if err != nil {
                 print(err as Any)
+                alert.title = "Register Failed"
+                alert.message = "Email invalid or password minimum 6 characters"
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
             print("save database successfully")
             //init Alert
-            let alert = UIAlertController(title: "Notification", message: "Register Successfully", preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.destructive, handler: nil))
             
             self.textfield_Password.text = ""
             self.textfield_Name.text = ""

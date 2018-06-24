@@ -14,6 +14,8 @@ import FirebaseStorage
 class FriendController: UIViewController {
 
     @IBOutlet weak var friendTableView: UITableView!
+    @IBOutlet weak var qrButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
     var conversationDelegate: ConversationDelegate? = nil
     
@@ -26,6 +28,8 @@ class FriendController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.qrButton.layer.cornerRadius = 0.25
+        self.addButton.layer.cornerRadius = 0.25
         self.observeFriends()
     }
 
@@ -39,6 +43,9 @@ class FriendController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == nil) {
+            return;
+        }
         if (segue.identifier! == "segueFriendToChat") {
             var chatView = segue.destination as! ChatController
             self.conversationDelegate = chatView

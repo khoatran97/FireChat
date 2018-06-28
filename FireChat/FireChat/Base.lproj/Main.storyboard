@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -129,7 +129,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-z3-jZe" userLabel="Button Login">
-                                <rect key="frame" x="47" y="441" width="280" height="51"/>
+                                <rect key="frame" x="47" y="442" width="280" height="51"/>
                                 <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="0.4318011558219178" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="Zq2-CC-ffh"/>
@@ -194,11 +194,24 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k37-gZ-NJn">
+                                <rect key="frame" x="212" y="406" width="115" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ye0-6d-B6q"/>
+                                    <constraint firstAttribute="width" constant="115" id="diC-7J-iip"/>
+                                </constraints>
+                                <state key="normal" title="Forgot Password">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnAction_ResetPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9OF-q6-1rq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47877043489999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Gqi-ev-GO0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="12.5" id="4Sw-P4-oue"/>
-                            <constraint firstItem="3uo-z3-jZe" firstAttribute="top" secondItem="Gqi-ev-GO0" secondAttribute="bottom" constant="20" id="7oj-xf-Hed"/>
+                            <constraint firstItem="3uo-z3-jZe" firstAttribute="top" secondItem="Gqi-ev-GO0" secondAttribute="bottom" constant="21" id="7oj-xf-Hed"/>
                             <constraint firstItem="vQS-Tq-eX2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="8LN-yc-qNf"/>
                             <constraint firstItem="Bpz-nv-5bj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BZM-rm-GxS"/>
                             <constraint firstItem="pvh-fv-R9m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="DSE-Lm-ael"/>
@@ -208,9 +221,11 @@
                             <constraint firstItem="r4a-bZ-gYW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="JWR-je-oeu"/>
                             <constraint firstItem="JQC-v9-2vc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="KvJ-Fz-BkI"/>
                             <constraint firstItem="MZH-QD-2Ky" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N00-wl-KyW"/>
+                            <constraint firstItem="k37-gZ-NJn" firstAttribute="top" secondItem="Gqi-ev-GO0" secondAttribute="bottom" constant="-15" id="QR5-wz-NSQ"/>
                             <constraint firstItem="pvh-fv-R9m" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="12.5" id="SZF-1e-Lav"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pvh-fv-R9m" secondAttribute="trailing" constant="48" id="T8e-LW-CAO"/>
                             <constraint firstItem="r4a-bZ-gYW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="TJx-XF-rlm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k37-gZ-NJn" secondAttribute="trailing" constant="48" id="VI1-2d-XpQ"/>
                             <constraint firstItem="Gqi-ev-GO0" firstAttribute="top" secondItem="JQC-v9-2vc" secondAttribute="bottom" constant="20.5" id="br4-QH-jtG"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eHx-F3-Bwt" secondAttribute="trailing" constant="20" symbolic="YES" id="bw3-Ga-gdL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JQC-v9-2vc" secondAttribute="trailing" constant="48" id="dtk-gY-5Oy"/>
@@ -227,6 +242,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9DA-Ey-atf"/>
                     <connections>
+                        <outlet property="btn_ForgotPassword" destination="k37-gZ-NJn" id="RB7-QV-K9l"/>
                         <outlet property="btn_Login" destination="3uo-z3-jZe" id="qVc-3p-XJN"/>
                         <outlet property="btn_Register" destination="vQS-Tq-eX2" id="hsw-CU-at0"/>
                         <outlet property="img_User" destination="Bpz-nv-5bj" id="ics-df-H48"/>
@@ -732,6 +748,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="LmI-dm-WDE"/>
         <segue reference="XyW-Y3-kFW"/>
-        <segue reference="gaK-cW-x0M"/>
+        <segue reference="Pev-RA-iiJ"/>
     </inferredMetricsTieBreakers>
 </document>

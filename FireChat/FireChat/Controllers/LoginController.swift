@@ -25,6 +25,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var textfiel_EmailLogin: UITextField!
     @IBOutlet weak var textfield_PasswordLogin: UITextField!
     @IBOutlet weak var img_User: UIImageView!
+    @IBOutlet weak var btn_ForgotPassword: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class LoginController: UIViewController {
         //Khoi tao la man hinh login nen se an btn_Register vaf viewRegister
         btn_Register.isHidden = true
         btn_Login.isHidden = false
+        btn_ForgotPassword.isHidden = false
         viewRegister.isHidden = true
         viewLogin.isHidden = false
         
@@ -74,7 +76,7 @@ class LoginController: UIViewController {
             print("Chua login")
         } else {
             print("Da login")
-            self.performSegue(withIdentifier: "segueToMain", sender: self)
+            performSegue(withIdentifier: "segueToMain", sender: self)
         }
     }
     
@@ -199,6 +201,37 @@ class LoginController: UIViewController {
         
     }
     
+    @IBAction func btnAction_ResetPassword(_ sender: Any) {
+        let alert = UIAlertController(title: "Forgot Password", message: "Reset password using email", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addTextField { (textfield) in
+            textfield.placeholder = "input email to reset password"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action) in
+            guard let email = alert.textFields?.first?.text else {
+                return
+            }
+            
+            Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        let resetFailedAlert = UIAlertController(title: "Reset Failed", message: error.localizedDescription, preferredStyle: .alert)
+                        resetFailedAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(resetFailedAlert, animated: true, completion: nil)
+                    } else {
+                        let resetEmailSentAlert = UIAlertController(title: "Reset email sent successfully", message: "Check your email", preferredStyle: .alert)
+                        resetEmailSentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(resetEmailSentAlert, animated: true, completion: nil)
+                    }
+                }
+            })
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -206,6 +239,7 @@ class LoginController: UIViewController {
             viewLogin.isHidden = false
             viewRegister.isHidden = true
             btn_Login.isHidden = false
+            btn_ForgotPassword.isHidden = false
             btn_Register.isHidden = true
             img_User.isUserInteractionEnabled = false
             break
@@ -214,6 +248,7 @@ class LoginController: UIViewController {
             viewLogin.isHidden = true
             viewRegister.isHidden = false
             btn_Register.isHidden = false
+            btn_ForgotPassword.isHidden = true
             btn_Login.isHidden = true
             img_User.isUserInteractionEnabled = true
             break

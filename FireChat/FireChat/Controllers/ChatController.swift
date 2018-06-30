@@ -8,14 +8,16 @@
 
 import UIKit
 import JSQMessagesViewController
+import MobileCoreServices
+import AVKit
 import FirebaseAuth
 import Firebase
 
-class ChatController: JSQMessagesViewController {
+class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var Messages = [JSQMessage]()
     var conversation: Conversation? = nil
-    
+    let picker = UIImagePickerController()
     private lazy var chatReference: DatabaseReference =
         Constants.refs.databaseConversations.child("/\((self.conversation?.id)!)")
     
@@ -36,10 +38,9 @@ class ChatController: JSQMessagesViewController {
         self.senderId = (Auth.auth().currentUser?.uid)!
         self.senderDisplayName = (Auth.auth().currentUser?.displayName)!
         
-        inputToolbar.contentView.leftBarButtonItem = nil
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
-        
+        picker.delegate = self
         self.observeChats()
     }
 
@@ -79,18 +80,106 @@ class ChatController: JSQMessagesViewController {
         self.finishSendingMessage()
     }
     
+    override func didPressAccessoryButton(_ sender: UIButton!) {
+        let alert = UIAlertController(title: "Message Media", message: "Please select message media", preferredStyle: .actionSheet);
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let photos = UIAlertAction(title: "Photos",style: .default, handler: {(alert:UIAlertAction) in
+            self.chooseMedia(type: kUTTypeImage)})
+        let videos = UIAlertAction(title: "Videos",style: .default, handler: {(alert:UIAlertAction) in
+            self.chooseMedia(type: kUTTypeMovie)})
+        alert.addAction(photos)
+        alert.addAction(videos)
+        alert.addAction(cancel)
+        present(alert,animated:true,completion:nil)
+    }
+    
+    func chooseMedia(type: CFString){
+        picker.mediaTypes = [type as String]
+        present(picker,animated:true,completion:nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pic = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            let img = JSQPhotoMediaItem(image: pic)
+            self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: img))
+        }else if let vid = info[UIImagePickerControllerMediaURL] as? URL{
+            let video =  JSQVideoMediaItem(fileURL: vid, isReadyToPlay: true)
+            self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
+        }
+        self.dismiss(animated: true, completion: nil)
+        collectionView.reloadData()
+    }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
-        
-        if (Messages[indexPath.row].senderId == self.senderId) {
-            cell.textView.textColor = UIColor.white
-        }
-        else {
-            cell.textView.textColor = UIColor.black
+        let mgs = Messages[indexPath.row]
+        if(mgs.isMediaMessage==false){
+            if (Messages[indexPath.row].senderId == self.senderId) {
+                cell.textView.textColor = UIColor.white
+            }
+            else {
+                cell.textView.textColor = UIColor.black
+                }
         }
         return cell
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        let mgs = Messages[indexPath.item]
+        if mgs.isMediaMessage{
+            if let vid = mgs.media as? JSQVideoMediaItem{
+                let player = AVPlayer(url: vid.fileURL)
+                let playerController = AVPlayerViewController()
+                playerController.player = player
+                self.present(playerController, animated: true, completion: nil)
+            }else if let pic = mgs.media as? JSQPhotoMediaItem{
+                let uiImageView = UIImageView(image: pic.image)
+                performZoomPicture(uiImageView)
+            }
+        }
+    }
+    var startFrame: CGRect?
+    var blackbackground: UIView?
+    func performZoomPicture(_ imageView:UIImageView){
+        print("Handle zoom picture");
+        print(imageView)
+        startFrame = imageView.frame
+        print(startFrame)
+        let zoomingImageView = UIImageView(frame: startFrame!)
+        zoomingImageView.image = imageView.image!
+        zoomingImageView.isUserInteractionEnabled = true
+        print(zoomingImageView)
+        zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(performZoomIn)))
+        if let keyWindow = UIApplication.shared.keyWindow{
+            
+            blackbackground = UIView(frame:keyWindow.frame)
+            blackbackground?.backgroundColor = UIColor.black
+            blackbackground?.alpha = 0
+            keyWindow.addSubview(blackbackground!)
+            keyWindow.addSubview(zoomingImageView)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.blackbackground?.alpha = 1
+                self.inputToolbar.alpha = 0
+                let height = (self.startFrame?.height)!/(self.startFrame?.width)!*keyWindow.frame.width
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+                zoomingImageView.center = keyWindow.center
+            }, completion: nil)
+        }
+    }
+    @objc func performZoomIn(tapGesture: UIGestureRecognizer){
+        print("perform zoom in")
+        print(tapGesture.view)
+        if let zoomOutView = tapGesture.view{
+            print("got the view")
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                zoomOutView.frame = self.startFrame!
+                self.blackbackground?.alpha = 0
+                self.inputToolbar.alpha = 1
+            }, completion: {(completed) in
+                zoomOutView.removeFromSuperview();
+                self.collectionView.reloadData();
+            })
+        }
+    }
     private func observeChats() {
         _ = self.chatReference.queryLimited(toLast: 25)
         _ = chatReference.observe(.childAdded, with: { (snapshot) -> Void in

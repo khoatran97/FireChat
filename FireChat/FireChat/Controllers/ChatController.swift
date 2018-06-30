@@ -12,6 +12,7 @@ import MobileCoreServices
 import AVKit
 import FirebaseAuth
 import Firebase
+import FirebaseStorage
 
 class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -42,6 +43,7 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         picker.delegate = self
         self.observeChats()
+        self.observeChatMedia()
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,7 +103,8 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pic = info[UIImagePickerControllerOriginalImage] as? UIImage{
             let img = JSQPhotoMediaItem(image: pic)
-            self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: img))
+            //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: img))
+            sendMedia(image: pic, video: nil, senderID: self.senderId, senderName: senderDisplayName)
         }else if let vid = info[UIImagePickerControllerMediaURL] as? URL{
             let video =  JSQVideoMediaItem(fileURL: vid, isReadyToPlay: true)
             self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
@@ -180,6 +183,40 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             })
         }
     }
+    func getStorage()->StorageReference{
+        return Storage.storage(url: "gs://ios-finalproject-ed16a.appspot.com").reference()
+    }
+    func getImageStorageRef()->StorageReference{
+        return Storage.storage().reference().child("message_images")
+    }
+    func sendMedia(image: UIImage?, video: URL?, senderID: String, senderName:String){
+        if image != nil{
+            let imageName = UUID().uuidString
+            let ref = getImageStorageRef().child(imageName)
+            if let uploadData = UIImageJPEGRepresentation(image!, 0.2){
+                ref.putData(uploadData, metadata: nil, completion: { (metadata, err) in
+                    if err != nil {
+                        print(err as Any)
+                        return
+                    }
+                    
+                    print("upload image message successfully")
+                    ref.downloadURL(completion: { (url, err) in
+                        if err != nil {
+                            print(err as Any)
+                            return
+                        }
+                        print(url?.absoluteString)
+                        let newMessage = self.chatReference.childByAutoId()
+                        guard let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "imgURL": url?.absoluteString] as? [String : AnyObject] else {
+                            return
+                        }
+                        newMessage.setValue(message)
+                    })
+                })
+            }
+        }
+    }
     private func observeChats() {
         _ = self.chatReference.queryLimited(toLast: 25)
         _ = chatReference.observe(.childAdded, with: { (snapshot) -> Void in
@@ -188,7 +225,10 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             if let senderId = chatData["senderId"] as String!, senderId.characters.count > 0 {
                 let senderName = chatData["senderName"] as String!
                 let message = chatData["message"] as String!
-                
+                if message == nil
+                {
+                    return
+                }
                 if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, text: message) {
                     self.Messages.append(newMessage)
                     JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
@@ -197,6 +237,43 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                 else {
                     print("Can not receive new message")
                 }
+            }
+        })
+    }
+    private func observeChatMedia() {
+        _ = self.chatReference.queryLimited(toLast: 25)
+        _ = chatReference.observe(.childAdded, with: { (snapshot) -> Void in
+            let chatData = snapshot.value as! Dictionary<String, String>
+            let id = snapshot.key
+            if let senderId = chatData["senderId"] as String!, senderId.characters.count > 0 {
+                let senderName = chatData["senderName"] as String!
+                let message = chatData["message"] as String!
+                let imgURL = chatData["imgURL"] as String!
+                if imgURL == nil{
+                    return
+                }
+                let url = URL(string: imgURL!)
+                URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
+                    if err != nil {
+                        print(err as Any)
+                        return
+                    }
+                    
+                    print("get message media successfully")
+                    
+                    DispatchQueue.main.async {
+                        let dowloadImage = UIImage(data: data!)
+                        let img = JSQPhotoMediaItem(image: dowloadImage)
+                        if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: img) {
+                            self.Messages.append(newMessage)
+                            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                            self.finishReceivingMessage()
+                        }
+                    }
+                }).resume()
+            }
+            else {
+                print("Can not receive new message")
             }
         })
     }

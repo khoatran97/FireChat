@@ -105,7 +105,7 @@ class groupChatTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "segueToChatGroupVC", sender: self)
     }
 
     

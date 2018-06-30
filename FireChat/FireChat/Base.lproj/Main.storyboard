@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -787,6 +787,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="X3Z-vk-gxj"/>
                     <connections>
                         <segue destination="Erm-Mg-a4P" kind="show" identifier="segueToAddGroupChat" id="uJR-wS-pt9"/>
+                        <segue destination="2fe-a9-TOx" kind="show" identifier="segueToChatGroupVC" id="hOw-Ko-JQz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9U8-Xh-jRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -916,12 +917,11 @@
                         <outlet property="listFriendTableView" destination="nhx-cH-ZVp" id="bOG-Dh-P4r"/>
                         <outlet property="textField_GroupName" destination="CF6-GR-Mqv" id="153-GW-lA0"/>
                         <outlet property="textField_ListFriend" destination="i95-ku-mpK" id="Z7A-Pj-gem"/>
-                        <segue destination="2fe-a9-TOx" kind="show" identifier="segueToChatGroupVC" id="Mmf-xV-LYo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8cG-WC-3F6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4404" y="1645"/>
+            <point key="canvasLocation" x="5060" y="1575"/>
         </scene>
         <!--Chat Group View Controller-->
         <scene sceneID="9tf-23-CSm">
@@ -936,7 +936,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVW-1T-UCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5338" y="1645"/>
+            <point key="canvasLocation" x="4186" y="2087"/>
         </scene>
         <!--Group-->
         <scene sceneID="RQ5-Fa-Uld">

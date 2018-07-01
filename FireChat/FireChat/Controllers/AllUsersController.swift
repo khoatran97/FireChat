@@ -96,7 +96,6 @@ class AllUsersController: UITableViewController {
         // Check in friendlist
         dispatchGroup.enter()
         Constants.refs.databaseUsers.child("/\((users[indexPath.row].id)!)/friends").observeSingleEvent(of: .value, with: {snapshot in
-            debugPrint("\((users[indexPath.row].id)!)/\((Auth.auth().currentUser?.uid)!)")
             if snapshot.hasChild("\((Auth.auth().currentUser?.uid)!)") {
                 cell.addButton.isHidden = true
             }
@@ -106,7 +105,6 @@ class AllUsersController: UITableViewController {
         // Check in request list
         dispatchGroup.enter()
         Constants.refs.databaseUsers.child("/\((users[indexPath.row].id)!)/requests").observeSingleEvent(of: .value, with: {snapshot in
-            debugPrint("\((users[indexPath.row].id)!)/\((Auth.auth().currentUser?.uid)!)")
             if snapshot.hasChild("\((Auth.auth().currentUser?.uid)!)") {
                 cell.addButton.isHidden = true
             }
@@ -116,7 +114,6 @@ class AllUsersController: UITableViewController {
         // Check in blacklist
         dispatchGroup.enter()
         Constants.refs.databaseUsers.child("/\((users[indexPath.row].id)!)/blacklist").observeSingleEvent(of: .value, with: {snapshot in
-            debugPrint("\((users[indexPath.row].id)!)/\((Auth.auth().currentUser?.uid)!)")
             if snapshot.hasChild("\((Auth.auth().currentUser?.uid)!)") {
                 cell.addButton.isHidden = true
             }

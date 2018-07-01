@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1243,7 +1243,6 @@
                                     <outlet property="avatarImage" destination="Z5S-cK-uFk" id="Vi3-Lw-CuD"/>
                                     <outlet property="deleteButton" destination="tPl-Qx-xYT" id="Wp2-mm-2GF"/>
                                     <outlet property="nameLabel" destination="sdT-ny-kK6" id="E2f-zA-8O7"/>
-                                    <outlet property="rejectButton" destination="tPl-Qx-xYT" id="zr1-Gh-drA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1294,9 +1293,9 @@
         <image name="userAvatar" width="96" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yac-JE-R9N"/>
+        <segue reference="oe1-Au-mkP"/>
         <segue reference="MN6-bZ-9ax"/>
-        <segue reference="LmI-dm-WDE"/>
-        <segue reference="gaK-cW-x0M"/>
+        <segue reference="yTk-1b-GTm"/>
+        <segue reference="Pev-RA-iiJ"/>
     </inferredMetricsTieBreakers>
 </document>

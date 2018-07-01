@@ -61,3 +61,9 @@
 "Block" = "Bloquer";
 "Change language" = "Changer le langue";
 "Please close and reopen app to apply the change!" = "Fermez et rouvrez pour compléter changer, s'il vous plaît";
+"Edit" = "Editer";
+"Done" = "Terminer";
+"Delete friend" = "Supprimer un(e) ami(e)";
+"Do you want to unfriend?" = "Voulez-vous supprimer cet ami(e)?";
+"Yes" = "Oui";
+"No" = "Non";

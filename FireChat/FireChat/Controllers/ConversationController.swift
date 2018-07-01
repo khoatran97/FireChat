@@ -42,7 +42,7 @@ class ConversationController: UIViewController {
     //init NavigationBar
     func initNavBar() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Logout", comment: ""), style: .plain, target: self, action: #selector(handleLogout))
         
         let uid = Auth.auth().currentUser?.uid
         Database.database().reference().child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
@@ -71,7 +71,10 @@ class ConversationController: UIViewController {
     }
     
     @objc func handleProfile() {
-        self.performSegue(withIdentifier: "toProfileVC", sender: self)
+        //self.performSegue(withIdentifier: "toProfileVC", sender: self)
+        if let tabBarController = self.tabBarController {
+            self.tabBarController?.selectedIndex = 4
+        }
     }
     @objc func handleLogout() {
         do {
@@ -79,11 +82,11 @@ class ConversationController: UIViewController {
             
             let alert = UIAlertController(title: NSLocalizedString("Logout", comment: ""), message: NSLocalizedString("You logged out successfully", comment: ""), preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when, execute: {
                 alert.dismiss(animated: true, completion: nil)
             })
-            self.present(alert, animated: true, completion: nil)
             
         } catch {
             print("Logout failed")
@@ -133,6 +136,26 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
         cell.message.text = ""
         
         let dispatchGroup = DispatchGroup()
+        // Check in friendlist
+        dispatchGroup.enter()
+        Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/friends").observeSingleEvent(of: .value, with: {snapshot in
+            if !(snapshot.hasChild("\((Auth.auth().currentUser?.uid)!)")) {
+                cell.isUserInteractionEnabled = false
+                cell.name.isEnabled = false
+            }
+            dispatchGroup.leave()
+        })
+        
+        // Check in blacklist
+        dispatchGroup.enter()
+        Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/blacklist").observeSingleEvent(of: .value, with: {snapshot in
+            if snapshot.hasChild("\((Auth.auth().currentUser?.uid)!)") {
+                cell.isUserInteractionEnabled = false
+                cell.name.isEnabled = false
+            }
+            dispatchGroup.leave()
+        })
+        
         dispatchGroup.enter()
         DispatchQueue.global(qos: .default).async {
             Constants.refs.databaseUsers.child("/\((self.Conversations[indexPath.row].receiverId)!)/profileImageUrl").observe(.value, with: {snap in

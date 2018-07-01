@@ -66,11 +66,11 @@ class FriendController: UIViewController {
     }
     
     @IBAction func addButton_TouchUpInside(_ sender: Any) {
-        let addAlert = UIAlertController(title: "Add Friend", message: "How do you want to add your friend?", preferredStyle: .actionSheet)
-        let scanQR = UIAlertAction(title: "Scan QR code", style: .default) {(UIAlertAction) -> Void in
+        let addAlert = UIAlertController(title: NSLocalizedString("Add Friend", comment: ""), message:  NSLocalizedString("How do you want to add your friend?", comment: ""), preferredStyle: .actionSheet)
+        let scanQR = UIAlertAction(title: NSLocalizedString("Scan QR code", comment: ""), style: .default) {(UIAlertAction) -> Void in
             // Open scan view
         }
-        let search = UIAlertAction(title: "Search", style: .default) { (UIALertAction) in
+        let search = UIAlertAction(title: NSLocalizedString("Search", comment: ""), style: .default) { (UIALertAction) in
             self.performSegue(withIdentifier: "segueToAllUsers", sender: self)
         }
         addAlert.addAction(scanQR)

@@ -56,7 +56,7 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
         img_AddPhoto.isUserInteractionEnabled = true
         
         //navigation bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create Group", style: .plain, target: self, action: #selector(handleCreategroup))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Create group", comment: ""), style: .plain, target: self, action: #selector(handleCreategroup))
         
         Members.append((Auth.auth().currentUser?.uid)!)
     }
@@ -123,16 +123,16 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
         
         picker.delegate = self
         
-        alert.addAction(UIAlertAction(title: "Photo", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Photo", comment: ""), style: .default, handler: { (action) in
             picker.sourceType = .photoLibrary
             self.present(picker, animated: true, completion: nil)
         }))
         
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Camera", comment: ""), style: .default, handler: { (action) in
             print("Camera")
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -261,10 +261,3 @@ extension AddGroupChatViewController {
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
-
-
-
-
-
-

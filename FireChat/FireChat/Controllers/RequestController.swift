@@ -117,19 +117,19 @@ class RequestController: UITableViewController {
         let row = sender.tag
         let user = Request[row]
         
-        let confirmAlert = UIAlertController(title: "Reject request", message: "", preferredStyle: .actionSheet)
-        let rejectAction = UIAlertAction(title: "Reject", style: .default) { (UIAlertAction) in
+        let confirmAlert = UIAlertController(title: NSLocalizedString("Reject request", comment: ""), message: "", preferredStyle: .actionSheet)
+        let rejectAction = UIAlertAction(title: NSLocalizedString("Reject", comment: ""), style: .default) { (UIAlertAction) in
             Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/requests/\(user.id!)").removeValue()
             self.Request.remove(at: row)
             self.tableView.reloadData()
         }
-        let blockAction = UIAlertAction(title: "Prevent this user from sending you request", style: .destructive) { (UIAlertAction) in
+        let blockAction = UIAlertAction(title: NSLocalizedString("Block", comment: ""), style: .destructive) { (UIAlertAction) in
             Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/requests/\(user.id!)").removeValue()
             Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/blacklist/\(user.id!)").updateChildValues(["name": user.name!])
             self.Request.remove(at: row)
             self.tableView.reloadData()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         
         confirmAlert.addAction(rejectAction)
         confirmAlert.addAction(blockAction)

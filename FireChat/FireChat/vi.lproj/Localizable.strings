@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  FireChat
+
+  Created by Khoa Huu Tran on 01/07/2018.
+  Copyright © 2018 HKN Team. All rights reserved.
+*/
+
+"Logout" = "Đăng xuất";
+"You logged out successfully" = "Bạn đã đăng xuất thành công";
+"Register failed" = "Đăng ký thất bại";
+"Email existed or password minimum 6 characters" = "Email đã tồn tại hoặc mâth khẩu phải trên 6 ký tự";
+"Cancel" = "Huỷ";
+"Register" = "Đăng ký";
+"Register successfully" = "Đăng ký thành công";
+"Login failed" = "Đăng nhập thất bại";
+"Email or password is invalid" = "Email hoặc mật khẩu không hợp lệ";
+"Forgot password" ="Quên mật khẩu";
+"Reset password using email" = "Đặt lại mật khẩu sử dụng email";
+"Input email to reset password" = "Nhập email để đặt lại mật khẩu";
+"Send" = "Gửi";
+"Reset failed" = "Đặt lại mật khẩu thất bại";
+"Reset email is sent successfully" = "Email đã được gửi thành công";
+"Check your email" = "Kiểm tra email của bạn";
+"Photo" = "Hình ảnh";
+"Camera" = "Máy ảnh";
+"Message Media" = "Tin nhắn đa phương tiện";
+"Please select message media" = "Chọn loại tin nhắn";
+"Photos" = "Hình ảnh";
+"Videos" = "Video";
+"Add Friend" = "Thêm bạn bè";
+"How do you want to add your friend?" = "Chọn cách thức thêm bạn";
+"Scan QR code" = "Quét mã QR";
+"Search" = "Tìm kiếm";
+"Edit Name" = "Sửa tên";
+"You can input new name here" = "Chỉnh sửa tên hiển thị của bạn";
+"New name" = "Tên mới";
+"Password" = "Mật khẩu";
+"Do you want to change password?" = "Bạn có muốn đổi mật khẩu không?";
+"Old password" = "Mật khẩu cũ";
+"New password" = "Mật khẩu mới";
+"Confirm new password" = "Xác nhận mật khẩu";
+"Change password" = "Đổi mật khẩu";
+"Confirm password is wrong!" = "Xác nhận mật khẩu sai!";
+"Old password is wrong. Please check again!" = "Mật khẩu cũ sai. Vui lòng kiểm tra lại";
+"New password is invalid. Minimun password is 6 characters" = "Mật khẩu mới không hợp lệ. Mật khẩu phải có ít nhất 6 kí tự";
+"Successfully, please log in again with new password" = "Đổi mật khẩu thành công. Vui lòng đăng nhập lại với mật khẩu mới";
+"Do you want to log out?" = "Bạn có muốn đăng xuất không?";
+"Blacklist" = "Danh sách chặn";
+"Help" = "Trợ giúp";
+"Privacy" = "Bảo mật";
+"Group chat" = "Trò chuyện nhóm";
+"Create group" = "Tạo nhóm";
+"Search user" = "Tìm người dùng";
+"Add friend" = "Thêm bạn bè";
+"Add" = "Thêm";
+"Do you want to add this user to your friend list?" = "Bạn có muốn thêm người này vào danh sách bạn bè?";
+"You sent add friend request successfully" = "Bạn đã gửi yêu cầu kết bạn thành công";
+"Reject request" = "Từ chối yêu cầu kết bạn";
+"Reject" = "Từ chối";
+"Block" = "Chặn";
+"Change language" = "Thay đổi ngôn ngữ";
+"Please close and reopen app to apply the change!" = "Vui lòng tắt và mở lại ứng dụng để hoàn thành việc thay đổi";

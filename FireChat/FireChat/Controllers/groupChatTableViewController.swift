@@ -55,7 +55,7 @@ class groupChatTableViewController: UITableViewController {
     }
     
     func customNavigationBar() {
-        navigationItem.title = "Group Chat"
+        navigationItem.title = NSLocalizedString("Group chat", comment: "")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addGroup").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddGroup))
     }
     

@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  FireChat
+
+  Created by Khoa Huu Tran on 01/07/2018.
+  Copyright © 2018 HKN Team. All rights reserved.
+*/
+
+"Logout" = "Se déconnecter";
+"You logged out successfully" = "Vous vous êtes déconnecté avec succès";
+"Register failed" = "Enregistrement échoué";
+"Email existed or password minimum 6 characters" = "E-mail existe ou mot de passe avec 6 caractères minimal";
+"Cancel" = "Annuler";
+"Register" = "Enregistrement";
+"Register successfully" = "Enregistrement avec succès";
+"Login failed" = "Se connecter échoué";
+"Email or password is invalid" = "E-mail ou mot de passe est invalide";
+"Forgot password" ="Mot de passe oublié";
+"Reset password using email" = "Réinitialiser le mot de passe par email";
+"Input email to reset password" = "Entrez votre e-mail pour réinitialiser le mot de passe";
+"Send" = "Envoyer";
+"Reset failed" = "réinitialiser échoué";
+"Reset email is sent successfully" = "Envoyé avec succès";
+"Check your email" = "Vérifiez votre email";
+"Photo" = "Photo";
+"Camera" = "Caméra";
+"Message Media" = "Message Media";
+"Please select message media" = "Choisissez un type";
+"Photos" = "Photos";
+"Videos" = "Vidéos";
+"Add Friend" = "Ajouer un(e) ami(e)";
+"How do you want to add your friend?" = "Comment voulez-vous ajouter votre ami?";
+"Scan QR code" = "Scanner QR";
+"Search" = "Chercher";
+"Edit Name" = "Editer le nom";
+"You can input new name here" = "Vous pouvez entre votre nom ici";
+"New name" = "Nouveau nom";
+"Password" = "Mot de passe";
+"Do you want to change password?" = "Est-ce que vous voulez changer votre mot de passe?";
+"Old password" = "Ancien mot de passe";
+"New password" = "Nouveau mot de passe";
+"Confirm new password" = "Confirmer le nouveau mot de passe";
+"Change password" = "Changer Mot de passe";
+"Confirm password is wrong!" = "Confirmer mot de passe est faux!";
+"Old password is wrong. Please check again!" = "Ancien mot de passe est faux. Vérifiez encore!";
+"New password is invalid. Minimun password is 6 characters" = "le nouveau mot de passe est invalide. Le mot de passe doit avoir 6 caractères minimal";
+"Successfully, please log in again with new password" = "Complété avec succès. Vous vous connectez par le nouveau mot de passe, s'il vous plaît!";
+"Do you want to log out?" = "Voulez-vous vous déconnecter?";
+"Blacklist" = "Liste noire";
+"Help" = "Aide";
+"Privacy" = "Intimité";
+"Group chat" = "Discussion de groupe";
+"Create group" = "Créer une groupe";
+"Search user" = "Chercher un untilisateur";
+"Add friend" = "Ajouer un(e) ami(e)";
+"Add" = "Ajouer";
+"Do you want to add this user to your friend list?" = "Voulez-vous ajouer cet untilisateur?";
+"You sent add friend request successfully" = "Vous envoyé l'invitation";
+"Reject request" = "Rejecter les invitations";
+"Reject" = "Rejecter";
+"Block" = "Bloquer";
+"Change language" = "Changer le langue";
+"Please close and reopen app to apply the change!" = "Fermez et rouvrez pour compléter changer, s'il vous plaît";

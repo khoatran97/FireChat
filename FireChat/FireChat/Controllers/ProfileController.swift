@@ -79,12 +79,12 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         switch indexPath.row {
         case 0: //edit name
             print("Edit name")
-            let alert = UIAlertController(title: "Edit Name", message: "You can input new name at here", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString("Edit Name", comment: ""), message: NSLocalizedString("You can input new name here", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addTextField(configurationHandler: { (textfield) in
-                textfield.placeholder = "New Name"
+                textfield.placeholder = NSLocalizedString("New name", comment: "")
             })
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 let textField = alert.textFields![0] as UITextField
                 self.user.name = textField.text!
                 
@@ -92,7 +92,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                 let uid = Auth.auth().currentUser?.uid
                 Database.database().reference().child("Users").child(uid!).updateChildValues(["name" : textField.text!])
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
             
@@ -108,17 +108,17 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             break
         case 4: //change password
             print("Change password")
-            let alert = UIAlertController(title: "Password", message: "Do you want to change password", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString("Password", comment: ""), message: NSLocalizedString("Do you want to change password?", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
             alert.addTextField { (textfield) in
-                textfield.placeholder = "Old password"
+                textfield.placeholder = NSLocalizedString("Old password", comment: "")
                 textfield.isSecureTextEntry = true
             }
             alert.addTextField { (textfield) in
-                textfield.placeholder = "New password"
+                textfield.placeholder = NSLocalizedString("New password", comment: "")
                 textfield.isSecureTextEntry = true
             }
             alert.addTextField { (textfield) in
-                textfield.placeholder = "Confirm new password"
+                textfield.placeholder = NSLocalizedString("Confirm new password", comment: "")
                 textfield.isSecureTextEntry = true
             }
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
@@ -127,13 +127,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     return
                 }
                 
-                let alertNoti = UIAlertController(title: "Change Password", message: "", preferredStyle: UIAlertControllerStyle.alert)
+                let alertNoti = UIAlertController(title: NSLocalizedString("Change password", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.alert)
                 
                 if newPassword != confirmNewPassword {
-                    alertNoti.message = "confirm password is wrong!"
+                    alertNoti.message = NSLocalizedString("Confirm password is wrong!", comment: "")
                     alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
                     self.present(alertNoti, animated: true, completion: nil)
-                    print("confirm password is wrong!")
+                    print("Confirm password is wrong!")
                 } else {
                     //get current user
                     let user = Auth.auth().currentUser
@@ -143,7 +143,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     user?.reauthenticateAndRetrieveData(with: credential, completion: { (authData: AuthDataResult?, err) in
                         if err != nil {
                             print(err as Any)
-                            alertNoti.message = "Old password is wrong. Please check again!"
+                            alertNoti.message = NSLocalizedString("Change password", comment: "")
                             alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
                             self.present(alertNoti, animated: true, completion: nil)
                             return
@@ -152,13 +152,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                         user?.updatePassword(to: newPassword, completion: { (err) in
                             if err != nil {
                                 print(err as Any)
-                                alertNoti.message = "New password is invalid. Minimun password is 6 characters"
+                                alertNoti.message = NSLocalizedString("New password is invalid. Minimun password is 6 characters", comment: "")
                                 alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
                                 self.present(alertNoti, animated: true, completion: nil)
                                 return
                             }
                             
-                            alertNoti.message = "Successfully, please log in again with new password"
+                            alertNoti.message = NSLocalizedString("Successfully, please log in again with new password", comment: "")
                             alertNoti.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
                                 self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
                             }))
@@ -168,12 +168,12 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
                 
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
             break
         case 5: //logout
             //success
-            let alert = UIAlertController(title: "Logout", message: "Do you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString("Logout", comment: ""), message: NSLocalizedString("Do you want to log out?", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 print("Logout")
                 do {
@@ -184,7 +184,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                 print("sign out successfully")
                 self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
             
@@ -203,23 +203,23 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             break
         case 1:
             cell.imageCell.image = #imageLiteral(resourceName: "blacklist").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Blacklist"
+            cell.labelCell.text = NSLocalizedString("Blacklist", comment: "")
             break
         case 2:
             cell.imageCell.image = #imageLiteral(resourceName: "img_help").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Help"
+            cell.labelCell.text = NSLocalizedString("Help", comment: "")
             break
         case 3:
             cell.imageCell.image = #imageLiteral(resourceName: "img_info").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Privacy"
+            cell.labelCell.text = NSLocalizedString("Privacy", comment: "")
             break
         case 4:
             cell.imageCell.image = #imageLiteral(resourceName: "key").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Change password"
+            cell.labelCell.text = NSLocalizedString("Change password", comment: "")
             break
         case 5:
             cell.imageCell.image = #imageLiteral(resourceName: "img_logout").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Logout"
+            cell.labelCell.text = NSLocalizedString("Logout", comment: "")
             break
         default:
             break

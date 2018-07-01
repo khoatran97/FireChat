@@ -83,11 +83,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
-        let alert = UIAlertController(title: "Message Media", message: "Please select message media", preferredStyle: .actionSheet);
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let photos = UIAlertAction(title: "Photos",style: .default, handler: {(alert:UIAlertAction) in
+        let alert = UIAlertController(title: NSLocalizedString("Message Media", comment: ""), message: NSLocalizedString("Please select message media", comment: ""), preferredStyle: .actionSheet);
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let photos = UIAlertAction(title: NSLocalizedString("Photos", comment: ""),style: .default, handler: {(alert:UIAlertAction) in
             self.chooseMedia(type: kUTTypeImage)})
-        let videos = UIAlertAction(title: "Videos",style: .default, handler: {(alert:UIAlertAction) in
+        let videos = UIAlertAction(title: NSLocalizedString("Videos", comment: ""),style: .default, handler: {(alert:UIAlertAction) in
             self.chooseMedia(type: kUTTypeMovie)})
         alert.addAction(photos)
         alert.addAction(videos)
@@ -282,6 +282,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                 let videoURL = chatData["videoURL"] as String!
                 if imgURL != nil{
                     let url = URL(string: imgURL!)
+                    let temp = JSQPhotoMediaItem(image: #imageLiteral(resourceName: "temp_img"))
+                    var newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: temp)
+                    let index = self.Messages.count
+                    self.Messages.append(newMessage!)
+                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
                     URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
                         if err != nil {
                             print(err as Any)
@@ -298,10 +303,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                             }else{
                                 img?.appliesMediaViewMaskAsOutgoing = false
                             }
-                            if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: img) {
-                                self.Messages.append(newMessage)
-                                JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-                                self.finishReceivingMessage()
+                            if let newMessage2 = JSQMessage(senderId: senderId, displayName: senderName, media: img){
+                                self.Messages[index] = newMessage2
+                                //JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                                //self.finishReceivingMessage()
+                                self.collectionView.reloadData()
                             }
                         }
                     }).resume()

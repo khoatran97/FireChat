@@ -87,8 +87,8 @@ class LoginController: UIViewController {
             return
         }
         
-        let alert = UIAlertController(title: "Register Failed", message: "Email existed or password minimum 6 characters", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Register failed", comment: ""), message: NSLocalizedString("Email existed or password minimum 6 characters", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         Auth.auth().createUser(withEmail: email, password: password) { (user: AuthDataResult?, err) in
             
@@ -138,7 +138,6 @@ class LoginController: UIViewController {
                         self.registerIntoDatabaseWithUid(uid: uid!, values: values)
                         self.performSegue(withIdentifier: "segueToMain", sender: self)
                     })
-                    
                 })
             }
             
@@ -149,13 +148,13 @@ class LoginController: UIViewController {
         let ref = Database.database().reference()
         let userRef = ref.child("Users").child(uid)
         
-         let alert = UIAlertController(title: "Register", message: "Register Successfully", preferredStyle: UIAlertControllerStyle.alert)
+         let alert = UIAlertController(title: NSLocalizedString("Register", comment: ""), message: NSLocalizedString("Register successfully", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         
         userRef.updateChildValues(values) { (err, ref) in
             if err != nil {
                 print(err as Any)
-                alert.title = "Register Failed"
-                alert.message = "Email invalid or password minimum 6 characters"
+                alert.title = NSLocalizedString("Register failed", comment: "")
+                alert.message = NSLocalizedString("Email existed or password minimum 6 characters", comment: "")
                 self.present(alert, animated: true, completion: nil)
                 return
             }
@@ -186,7 +185,7 @@ class LoginController: UIViewController {
             if err != nil {
                 print(err as Any)
                 
-                let alert = UIAlertController(title: "Login failed", message: "Email or password invalid", preferredStyle: .alert)
+                let alert = UIAlertController(title: NSLocalizedString("Login failed", comment: ""), message: NSLocalizedString("Email or password is invalid", comment: ""), preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 
@@ -202,13 +201,13 @@ class LoginController: UIViewController {
     }
     
     @IBAction func btnAction_ResetPassword(_ sender: Any) {
-        let alert = UIAlertController(title: "Forgot Password", message: "Reset password using email", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("Forgot password", comment: ""), message: NSLocalizedString("Reset password using email", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         
         alert.addTextField { (textfield) in
-            textfield.placeholder = "input email to reset password"
+            textfield.placeholder = NSLocalizedString("Input email to reset password", comment: "")
         }
         
-        alert.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: UIAlertActionStyle.default, handler: { (action) in
             guard let email = alert.textFields?.first?.text else {
                 return
             }
@@ -216,11 +215,11 @@ class LoginController: UIViewController {
             Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
                 DispatchQueue.main.async {
                     if let error = error {
-                        let resetFailedAlert = UIAlertController(title: "Reset Failed", message: error.localizedDescription, preferredStyle: .alert)
+                        let resetFailedAlert = UIAlertController(title: NSLocalizedString("Reset failed", comment: ""), message: error.localizedDescription, preferredStyle: .alert)
                         resetFailedAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(resetFailedAlert, animated: true, completion: nil)
                     } else {
-                        let resetEmailSentAlert = UIAlertController(title: "Reset email sent successfully", message: "Check your email", preferredStyle: .alert)
+                        let resetEmailSentAlert = UIAlertController(title: NSLocalizedString("Reset email is sent successfully", comment: ""), message: NSLocalizedString("Check your email", comment: ""), preferredStyle: .alert)
                         resetEmailSentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(resetEmailSentAlert, animated: true, completion: nil)
                     }
@@ -228,7 +227,7 @@ class LoginController: UIViewController {
             })
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -256,6 +255,38 @@ class LoginController: UIViewController {
             print("default")
         }
     }
+    
+    @IBAction func viButton_TouchUpInside(_ sender: Any) {
+        UserDefaults.standard.set(["vi"], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+        let announ = UIAlertController(title: NSLocalizedString("Change language", comment: ""), message: NSLocalizedString("Please close and reopen app to apply the change!", comment: ""), preferredStyle: .alert)
+        self.present(announ, animated: true, completion: nil)
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            announ.dismiss(animated: true, completion: nil)
+        })
+    }
+    @IBAction func enButton_TouchUpInside(_ sender: Any) {
+        UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+        let announ = UIAlertController(title: NSLocalizedString("Change language", comment: ""), message: NSLocalizedString("Please close and reopen app to apply the change!", comment: ""), preferredStyle: .alert)
+        self.present(announ, animated: true, completion: nil)
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            announ.dismiss(animated: true, completion: nil)
+        })
+    }
+    @IBAction func frButton_TouchUpInside(_ sender: Any) {
+        UserDefaults.standard.set(["fr"], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+        let announ = UIAlertController(title: NSLocalizedString("Change language", comment: ""), message: NSLocalizedString("Please close and reopen app to apply the change!", comment: ""), preferredStyle: .alert)
+        self.present(announ, animated: true, completion: nil)
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            announ.dismiss(animated: true, completion: nil)
+        })
+    }
+    
 }
 
 extension LoginController: UITextFieldDelegate {

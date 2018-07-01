@@ -173,6 +173,9 @@
                                 <state key="normal" title="Tiếng Việt">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="viButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vnh-Mu-yHJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZH-QD-2Ky">
                                 <rect key="frame" x="132.5" y="637" width="110" height="30"/>
@@ -183,6 +186,9 @@
                                 <state key="normal" title="English">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="enButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pKA-P6-H3u"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-bZ-gYW">
                                 <rect key="frame" x="265" y="637" width="110" height="30"/>
@@ -193,6 +199,9 @@
                                 <state key="normal" title="Français">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="frButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2gk-xE-VDr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k37-gZ-NJn">
                                 <rect key="frame" x="212" y="406" width="115" height="30"/>

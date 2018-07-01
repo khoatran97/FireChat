@@ -77,10 +77,12 @@ class ConversationController: UIViewController {
         do {
             try Auth.auth().signOut()
             
-            let alert = UIAlertController(title: "Logout", message: "Successfully", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
-            }))
+            let alert = UIAlertController(title: NSLocalizedString("Logout", comment: ""), message: NSLocalizedString("You logged out successfully", comment: ""), preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                alert.dismiss(animated: true, completion: nil)
+            })
             self.present(alert, animated: true, completion: nil)
             
         } catch {

@@ -20,18 +20,18 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         
         //declare alert controller
         let alert = UIAlertController()
-        alert.addAction(UIAlertAction(title: "Photo", style: UIAlertActionStyle.default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Photo", comment: ""), style: UIAlertActionStyle.default, handler: { (action) in
             print("Choose image from libary")
             picker.sourceType = .photoLibrary
             self.present(picker, animated: true, completion: nil)
         }))
         
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Camera", comment: ""), style: .default, handler: { (action) in
             print("take photo to choose image")
             
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
             print("Cancel")
         }))
         
@@ -70,18 +70,18 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
         //init alert controller
         let alert = UIAlertController()
         
-        alert.addAction(UIAlertAction(title: "Photo", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Photo", comment: ""), style: .default, handler: { (action) in
             picker.sourceType = .photoLibrary
             self.present(picker, animated: true, completion: nil)
             
             print("choose image successfully")
         }))
         
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Camera", comment: ""), style: .default, handler: { (action) in
             print("camera")
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }

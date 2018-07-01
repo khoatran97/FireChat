@@ -11,3 +11,7 @@ import Foundation
 protocol ConversationDelegate {
     func SetChatView(conversation: Conversation)
 }
+
+protocol GroupDelegate {
+    func setChatGroup(group: Group)
+}

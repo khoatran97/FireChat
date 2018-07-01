@@ -14,17 +14,43 @@ import MobileCoreServices
 class ChatGroupViewController: JSQMessagesViewController {
     
     var Messages = [JSQMessage]()
-    private lazy var chatReference: DatabaseReference =
-        Database.database().reference().child("ConversationGroup")
+    private lazy var chatReference: DatabaseReference? = nil
+    private lazy var userRef = Database.database().reference().child("Users")
+    var group: Group? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        senderId = "211654d654as6d4ad"
-        senderDisplayName = "Nam"
-        tabBarController?.tabBar.isHidden = true
+        initView()
+        fetchData()
+        
     }
+    
+    func initView() {
+        tabBarController?.tabBar.isHidden = true
+        //get member
+        if let members = group?.members {
+            for member in members {
+                if member == Auth.auth().currentUser?.uid {
+                    senderId = member
+                    senderDisplayName = ""
+                    userRef.child(member).observe(DataEventType.value) { (snapshot) in
+                        let value = snapshot.value as! Dictionary<String, AnyObject>
+                        
+                        let name = value["name"] as! String?
+                        self.senderDisplayName = name!
+                    }
+                }
+            }
+        }
+
+        title = group?.name
+        chatReference = Database.database().reference().child("GroupConversation").child((group?.conversationId!)!)
+    }
+    
+    
+    
+    // START COLLECTION
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let bubbleFactory = JSQMessagesBubbleImageFactory()
@@ -44,15 +70,6 @@ class ChatGroupViewController: JSQMessagesViewController {
         return Messages[indexPath.item]
     }
     
-    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-//        let newMessage = self.chatReference.childByAutoId()
-//        let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
-//        newMessage.setValue(message)
-        Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
-        collectionView.reloadData()
-        self.finishSendingMessage()
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         let mgs = Messages[indexPath.row]
@@ -67,5 +84,53 @@ class ChatGroupViewController: JSQMessagesViewController {
         
         return cell
     }
+    
+    //End Collection
 
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+        let newMessage = self.chatReference?.childByAutoId()
+        let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
+        newMessage?.setValue(message)
+        Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
+        collectionView.reloadData()
+        self.finishSendingMessage()
+    }
+    
+    //fetch data chat
+    func fetchData() {
+        chatReference?.queryLimited(toLast: 25)
+        chatReference?.observe(.childAdded, with: { (snapshot) in
+            let chatData = snapshot.value as! Dictionary <String, String>
+            
+            if let senderId = chatData["senderId"] as String!, senderId.characters.count > 0 {
+                let senderName = chatData["senderName"] as String?
+                let message = chatData["message"] as String?
+                if message == nil
+                {
+                    return
+                }
+                if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, text: message) {
+                    self.Messages.append(newMessage)
+                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                    self.finishReceivingMessage()
+                }
+                else {
+                    print("Can not receive new message")
+                }
+            }
+        })
+    }
 }
+
+extension ChatGroupViewController: GroupDelegate {
+    func setChatGroup(group: Group) {
+        self.group = group
+    }
+}
+
+
+
+
+
+
+

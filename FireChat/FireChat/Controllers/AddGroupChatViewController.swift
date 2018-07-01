@@ -68,6 +68,7 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
         
         let id = NSUUID().uuidString
         let imageID = NSUUID().uuidString
+        let conversationId = NSUUID().uuidString
         
         let databaseRef = Database.database().reference().child("Group").child(id)
         let storeRef = Storage.storage().reference().child("\(imageID).png")
@@ -86,7 +87,7 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
                     }
                     
                     let imageUrl = url?.absoluteString
-                    let values = ["id": id, "name": name, "imageUrl": imageUrl, "imageId": imageID, "members": self.Members] as [String: AnyObject]
+                    let values = ["id": id, "name": name, "imageUrl": imageUrl, "imageId": imageID, "members": self.Members, "conversationId": conversationId] as [String: AnyObject]
                     databaseRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
                         if err != nil {
                             print(err as Any)

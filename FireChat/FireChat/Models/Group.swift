@@ -14,4 +14,5 @@ struct Group {
     var imageUrl: String? = nil
     var imageId: String? = nil
     var members: [String] = []
+    var conversationId: String? = nil
 }

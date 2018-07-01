@@ -28,8 +28,8 @@ class FriendController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.qrButton.layer.cornerRadius = 0.25
-        self.addButton.layer.cornerRadius = 0.25
+        self.qrButton.layer.cornerRadius = self.qrButton.bounds.width / 2
+        self.addButton.layer.cornerRadius = self.addButton.bounds.width / 2
         self.observeFriends()
     }
 
@@ -64,6 +64,33 @@ class FriendController: UIViewController {
             }
         })
     }
+    
+    @IBAction func addButton_TouchUpInside(_ sender: Any) {
+        let addAlert = UIAlertController(title: "Add Friend", message: "How do you want to add your friend?", preferredStyle: .actionSheet)
+        let scanQR = UIAlertAction(title: "Scan QR code", style: .default) {(UIAlertAction) -> Void in
+            // Open scan view
+        }
+        let search = UIAlertAction(title: "Search", style: .default) { (UIALertAction) in
+            self.performSegue(withIdentifier: "segueToAllUsers", sender: self)
+        }
+        addAlert.addAction(scanQR)
+        addAlert.addAction(search)
+        self.present(addAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func editButton_TouchUpInside(_ sender: UIBarButtonItem) {
+        if self.friendTableView.isEditing {
+            self.friendTableView.setEditing(false, animated: true)
+            sender.title = "Edit"
+            //sender.image = UIImage(named: "edit")
+        }
+        else {
+            self.friendTableView.setEditing(true, animated: true)
+            sender.title = "Done"
+            //sender.image = UIImage(named: "done")
+        }
+    }
+    
 }
 
 extension FriendController: UITableViewDelegate, UITableViewDataSource {
@@ -153,4 +180,20 @@ extension FriendController: UITableViewDelegate, UITableViewDataSource {
         })
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let confirmAlert = UIAlertController(title: "Delete friend", message: "Do you want to unfriend?", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
+                Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/friends/\(self.Friends[indexPath.row].id!)").removeValue()
+            })
+            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        }
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.reloadData()
+    }
 }

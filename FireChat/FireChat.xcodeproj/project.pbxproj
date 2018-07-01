@@ -15,9 +15,15 @@
 		A90E58F420C9282500C2DEBE /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F320C9282500C2DEBE /* FriendController.swift */; };
 		A90E58F620C9296300C2DEBE /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F520C9296300C2DEBE /* Friend.swift */; };
 		A90E58F820C92B0C00C2DEBE /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90E58F720C92B0C00C2DEBE /* UserCell.swift */; };
+		A91900A220E79899009744F9 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91900A120E79899009744F9 /* RequestCell.swift */; };
+		A91900A420E7993F009744F9 /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91900A320E7993F009744F9 /* RequestController.swift */; };
+		A91900A720E7A582009744F9 /* CheckHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91900A620E7A582009744F9 /* CheckHelper.swift */; };
 		A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF98E20C823350006CF37 /* ConversationController.swift */; };
 		A91FF99120C824020006CF37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FF99020C824020006CF37 /* Constants.swift */; };
 		A95705D420DFFAA40069DBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95705D320DFFAA10069DBB5 /* Assets.xcassets */; };
+		A96088FD20E72E7E00FAAFB0 /* AllUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96088FC20E72E7E00FAAFB0 /* AllUsersCell.swift */; };
+		A96088FF20E7341200FAAFB0 /* AllUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96088FE20E7341200FAAFB0 /* AllUsersController.swift */; };
+		A960890120E7371D00FAAFB0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A960890020E7371D00FAAFB0 /* UserInfo.swift */; };
 		A99910B620DCACB000F42F2D /* QRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99910B520DCACB000F42F2D /* QRController.swift */; };
 		A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA869F20C2474E00F34166 /* AppDelegate.swift */; };
 		A9BA86A220C2474E00F34166 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA86A120C2474E00F34166 /* LoginController.swift */; };
@@ -42,9 +48,15 @@
 		A90E58F320C9282500C2DEBE /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
 		A90E58F520C9296300C2DEBE /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A90E58F720C92B0C00C2DEBE /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		A91900A120E79899009744F9 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
+		A91900A320E7993F009744F9 /* RequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestController.swift; sourceTree = "<group>"; };
+		A91900A620E7A582009744F9 /* CheckHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckHelper.swift; sourceTree = "<group>"; };
 		A91FF98E20C823350006CF37 /* ConversationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationController.swift; sourceTree = "<group>"; };
 		A91FF99020C824020006CF37 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A95705D320DFFAA10069DBB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A96088FC20E72E7E00FAAFB0 /* AllUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUsersCell.swift; sourceTree = "<group>"; };
+		A96088FE20E7341200FAAFB0 /* AllUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUsersController.swift; sourceTree = "<group>"; };
+		A960890020E7371D00FAAFB0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		A99910B520DCACB000F42F2D /* QRController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRController.swift; sourceTree = "<group>"; };
 		A9BA869C20C2474E00F34166 /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9BA869F20C2474E00F34166 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +110,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		A91900A520E7A555009744F9 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A91900A620E7A582009744F9 /* CheckHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		A9BA869320C2474D00F34166 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +142,7 @@
 		A9BA869E20C2474E00F34166 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				A91900A520E7A555009744F9 /* Helper */,
 				A95705D320DFFAA10069DBB5 /* Assets.xcassets */,
 				A90E58EC20C8E8F500C2DEBE /* Protocols */,
 				C0F5140220C7CEC700A57B75 /* Models */,
@@ -148,6 +169,10 @@
 				C08A621F20CA63C8002F676C /* ProfileController.swift */,
 				C08A622120CA65DC002F676C /* CustomProfileCell.swift */,
 				A99910B520DCACB000F42F2D /* QRController.swift */,
+				A96088FC20E72E7E00FAAFB0 /* AllUsersCell.swift */,
+				A96088FE20E7341200FAAFB0 /* AllUsersController.swift */,
+				A91900A120E79899009744F9 /* RequestCell.swift */,
+				A91900A320E7993F009744F9 /* RequestController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +183,7 @@
 				C0F5140320C7D94A00A57B75 /* User.swift */,
 				A90E58EF20C8EB5F00C2DEBE /* Conversation.swift */,
 				A90E58F520C9296300C2DEBE /* Friend.swift */,
+				A960890020E7371D00FAAFB0 /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -287,12 +313,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A960890120E7371D00FAAFB0 /* UserInfo.swift in Sources */,
 				A9BA86A220C2474E00F34166 /* LoginController.swift in Sources */,
 				A90E58F820C92B0C00C2DEBE /* UserCell.swift in Sources */,
 				A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */,
 				A90E58EE20C8E91800C2DEBE /* ConversationProtocol.swift in Sources */,
 				A99910B620DCACB000F42F2D /* QRController.swift in Sources */,
+				A96088FD20E72E7E00FAAFB0 /* AllUsersCell.swift in Sources */,
 				A90E58F620C9296300C2DEBE /* Friend.swift in Sources */,
+				A91900A720E7A582009744F9 /* CheckHelper.swift in Sources */,
 				A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */,
 				A90E58F220C9029300C2DEBE /* ConversationCell.swift in Sources */,
 				C08A622020CA63C8002F676C /* ProfileController.swift in Sources */,
@@ -300,7 +329,10 @@
 				A9BA86A020C2474E00F34166 /* AppDelegate.swift in Sources */,
 				C0F5140620C7E00D00A57B75 /* handleChooseImage.swift in Sources */,
 				C08A622220CA65DC002F676C /* CustomProfileCell.swift in Sources */,
+				A96088FF20E7341200FAAFB0 /* AllUsersController.swift in Sources */,
 				A90E58F420C9282500C2DEBE /* FriendController.swift in Sources */,
+				A91900A220E79899009744F9 /* RequestCell.swift in Sources */,
+				A91900A420E7993F009744F9 /* RequestController.swift in Sources */,
 				C0F5140420C7D94A00A57B75 /* User.swift in Sources */,
 				A91FF99120C824020006CF37 /* Constants.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ import Firebase
 import FirebaseStorage
 
 class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     var Messages = [JSQMessage]()
     var conversation: Conversation? = nil
     let picker = UIImagePickerController()
@@ -35,7 +35,7 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
         
         self.tabBarController?.tabBar.isHidden = true
         title = self.conversation?.receiverName
-
+        
         self.senderId = (Auth.auth().currentUser?.uid)!
         self.senderDisplayName = (Auth.auth().currentUser?.displayName)!
         
@@ -45,7 +45,7 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
         self.observeChats()
         self.observeChatMedia()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -107,7 +107,8 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             sendMedia(image: pic, video: nil, senderID: self.senderId, senderName: senderDisplayName)
         }else if let vid = info[UIImagePickerControllerMediaURL] as? URL{
             let video =  JSQVideoMediaItem(fileURL: vid, isReadyToPlay: true)
-            self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
+            sendMedia(image: nil, video: vid, senderID: self.senderId, senderName: self.senderDisplayName)
+            //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
         }
         self.dismiss(animated: true, completion: nil)
         collectionView.reloadData()
@@ -121,7 +122,7 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             }
             else {
                 cell.textView.textColor = UIColor.black
-                }
+            }
         }
         return cell
     }
@@ -183,11 +184,14 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             })
         }
     }
-    func getStorage()->StorageReference{
-        return Storage.storage(url: "gs://ios-finalproject-ed16a.appspot.com").reference()
-    }
+    //    func getStorage()->StorageReference{
+    //        return Storage.storage(url: "gs://ios-finalproject-ed16a.appspot.com").reference()
+    //    }
     func getImageStorageRef()->StorageReference{
         return Storage.storage().reference().child("message_images")
+    }
+    func getVideoStorageRef()->StorageReference{
+        return Storage.storage().reference().child("message_videos")
     }
     func sendMedia(image: UIImage?, video: URL?, senderID: String, senderName:String){
         if image != nil{
@@ -215,6 +219,30 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                     })
                 })
             }
+        }
+        if video != nil{
+            let videoName = UUID().uuidString
+            let ref = getVideoStorageRef().child(videoName)
+            ref.putFile(from: video!, metadata: nil, completion: { (metadata, err) in
+                if err != nil {
+                    print(err as Any)
+                    return
+                }
+                
+                print("upload video message successfully")
+                ref.downloadURL(completion: { (url, err) in
+                    if err != nil {
+                        print(err as Any)
+                        return
+                    }
+                    print(url?.absoluteString)
+                    let newMessage = self.chatReference.childByAutoId()
+                    guard let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "videoURL": url?.absoluteString] as? [String : AnyObject] else {
+                        return
+                    }
+                    newMessage.setValue(message)
+                })
+            })
         }
     }
     private func observeChats() {
@@ -249,31 +277,48 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                 let senderName = chatData["senderName"] as String!
                 let message = chatData["message"] as String!
                 let imgURL = chatData["imgURL"] as String!
-                if imgURL == nil{
-                    return
-                }
-                let url = URL(string: imgURL!)
-                URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
-                    if err != nil {
-                        print(err as Any)
-                        return
-                    }
-                    
-                    print("get message media successfully")
-                    
-                    DispatchQueue.main.async {
-                        let dowloadImage = UIImage(data: data!)
-                        let img = JSQPhotoMediaItem(image: dowloadImage)
-                        if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: img) {
-                            self.Messages.append(newMessage)
-                            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-                            self.finishReceivingMessage()
+                let videoURL = chatData["videoURL"] as String!
+                if imgURL != nil{
+                    let url = URL(string: imgURL!)
+                    URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
+                        if err != nil {
+                            print(err as Any)
+                            return
                         }
+                        
+                        print("get message media successfully")
+                        
+                        DispatchQueue.main.async {
+                            let dowloadImage = UIImage(data: data!)
+                            let img = JSQPhotoMediaItem(image: dowloadImage)
+                            if senderId==self.senderId{
+                                img?.appliesMediaViewMaskAsOutgoing = true
+                            }else{
+                                img?.appliesMediaViewMaskAsOutgoing = false
+                            }
+                            if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: img) {
+                                self.Messages.append(newMessage)
+                                JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                                self.finishReceivingMessage()
+                            }
+                        }
+                    }).resume()
+                }else if videoURL != nil{
+                    let url = URL(string: videoURL!)
+                    print("Getting video message")
+                    let video = JSQVideoMediaItem(fileURL: url, isReadyToPlay: true)
+                    if senderId==self.senderId{
+                        video?.appliesMediaViewMaskAsOutgoing = true
+                    }else{
+                        video?.appliesMediaViewMaskAsOutgoing = false
                     }
-                }).resume()
-            }
-            else {
-                print("Can not receive new message")
+                    if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: video) {
+                        self.Messages.append(newMessage)
+                        JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                        self.finishReceivingMessage()
+                        self.collectionView.reloadData()
+                    }
+                }
             }
         })
     }

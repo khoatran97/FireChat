@@ -25,31 +25,31 @@ class ChatGroupViewController: JSQMessagesViewController {
         senderDisplayName = "Nam"
         tabBarController?.tabBar.isHidden = true
     }
-
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
-        return Messages[indexPath.row]
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let bubbleFactory = JSQMessagesBubbleImageFactory()
+    
+        return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.blue)
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "userAvatar"), diameter: 30)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Messages.count
     }
     
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        return Messages[indexPath.row].senderId == self.senderId ? nil : NSAttributedString(string: Messages[indexPath.row].senderDisplayName)
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return Messages[indexPath.row].senderId == self.senderId ? 0 : 15
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        return Messages[indexPath.item]
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        let newMessage = self.chatReference.childByAutoId()
-        let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
-        newMessage.setValue(message)
+//        let newMessage = self.chatReference.childByAutoId()
+//        let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
+//        newMessage.setValue(message)
+        Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
+        collectionView.reloadData()
         self.finishSendingMessage()
     }
     
@@ -64,6 +64,7 @@ class ChatGroupViewController: JSQMessagesViewController {
                 cell.textView.textColor = UIColor.black
             }
         }
+        
         return cell
     }
 

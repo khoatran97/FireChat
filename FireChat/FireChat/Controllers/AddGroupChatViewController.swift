@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AddGroupChatViewController: UIViewController {
+class AddGroupChatViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // Outlet
     
     @IBOutlet weak var img_AddPhoto: UIImageView!
@@ -100,7 +100,23 @@ class AddGroupChatViewController: UIViewController {
     }
     
     @objc func handleAddPhoto() {
+        let alert = UIAlertController()
+        let picker = UIImagePickerController()
         
+        picker.delegate = self
+        
+        alert.addAction(UIAlertAction(title: "Photo", style: .default, handler: { (action) in
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            print("Camera")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
@@ -205,6 +221,27 @@ extension AddGroupChatViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     
+}
+
+extension AddGroupChatViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectImageFromPicker: UIImage?
+        if let editImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            selectImageFromPicker = editImage
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            selectImageFromPicker = originalImage
+        }
+        
+        if let selectImage = selectImageFromPicker {
+            img_AddPhoto.image = selectImage
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
 
 

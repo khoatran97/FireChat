@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  FireChat
+
+  Created by Khoa Huu Tran on 01/07/2018.
+  Copyright © 2018 HKN Team. All rights reserved.
+*/
+
+"Logout" = "Logout";
+"You logged out successfully" = "You logged out successfully";
+"Register failed" = "Register failed";
+"Email existed or password minimum 6 characters" = "Email existed or password minimum 6 characters";
+"Cancel" = "Cancel";
+"Register" = "Register";
+"Register successfully" = "Register successfully";
+"Login failed" = "Login failed";
+"Email or password is invalid" = "Email or password is invalid";
+"Forgot password" ="Forgot password";
+"Reset password using email" = "Reset password using email";
+"Input email to reset password" = "Input email to reset password";
+"Send" = "Send";
+"Reset failed" = "Reset failed";
+"Reset email is sent successfully" = "Reset email is sent successfully";
+"Check your email" = "Check your email";
+"Photo" = "Photo";
+"Camera" = "Camera";
+"Message Media" = "Message Media";
+"Please select message media" = "Please select message media";
+"Photos" = "Photos";
+"Videos" = "Videos";
+"Add Friend" = "Add Friend";
+"How do you want to add your friend?" = "How do you want to add your friend?";
+"Scan QR code" = "Scan QR code";
+"Search" = "Search";
+"Edit Name" = "Edit Name";
+"You can input new name here" = "You can input new name here";
+"New name" = "New name";
+"Password" = "Password";
+"Do you want to change password?" = "Do you want to change password?";
+"Old password" = "Old password";
+"New password" = "New password";
+"Confirm new password" = "Confirm new password";
+"Change password" = "Change password";
+"Confirm password is wrong!" = "Confirm password is wrong!";
+"Old password is wrong. Please check again!" = "Old password is wrong. Please check again!";
+"New password is invalid. Minimun password is 6 characters" = "New password is invalid. Minimun password is 6 characters";
+"Successfully, please log in again with new password" = "Successfully, please log in again with new password";
+"Do you want to log out?" = "Do you want to log out?";
+"Blacklist" = "Blacklist";
+"Help" = "Help";
+"Privacy" = "Privacy";
+"Group chat" = "Group chat";
+"Create group" = "Create group";
+"Search user" = "Search user";
+"Add friend" = "Add friend";
+"Add" = "Add";
+"Do you want to add this user to your friend list?" = "Do you want to add this user to your friend list?";
+"You sent add friend request successfully" = "You sent add friend request successfully";
+"Reject request" = "Reject request";
+"Reject" = "Reject";
+"Block" = "Block";
+"Change language" = "Change language";
+"Please close and reopen app to apply the change!" = "Please close and reopen app to apply the change!";

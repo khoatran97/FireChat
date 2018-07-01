@@ -83,11 +83,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
-        let alert = UIAlertController(title: "Message Media", message: "Please select message media", preferredStyle: .actionSheet);
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let photos = UIAlertAction(title: "Photos",style: .default, handler: {(alert:UIAlertAction) in
+        let alert = UIAlertController(title: NSLocalizedString("Message Media", comment: ""), message: NSLocalizedString("Please select message media", comment: ""), preferredStyle: .actionSheet);
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let photos = UIAlertAction(title: NSLocalizedString("Photos", comment: ""),style: .default, handler: {(alert:UIAlertAction) in
             self.chooseMedia(type: kUTTypeImage)})
-        let videos = UIAlertAction(title: "Videos",style: .default, handler: {(alert:UIAlertAction) in
+        let videos = UIAlertAction(title: NSLocalizedString("Videos", comment: ""),style: .default, handler: {(alert:UIAlertAction) in
             self.chooseMedia(type: kUTTypeMovie)})
         alert.addAction(photos)
         alert.addAction(videos)

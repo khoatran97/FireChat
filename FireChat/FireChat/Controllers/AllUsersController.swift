@@ -27,7 +27,7 @@ class AllUsersController: UITableViewController {
     private func setSearchController () {
         self.searchController.searchResultsUpdater = self as! UISearchResultsUpdating
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search user"
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search user", comment: "")
         self.navigationItem.searchController = self.searchController
         definesPresentationContext = true
     }
@@ -166,19 +166,19 @@ class AllUsersController: UITableViewController {
             user = Users[row]
         }
         
-        let confirmAlert = UIAlertController(title: "Add friend", message: "Do you want to add this user to your friend list", preferredStyle: .alert)
-        let addAction = UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
+        let confirmAlert = UIAlertController(title: NSLocalizedString("Add friend", comment: ""), message: NSLocalizedString("Do you want to add this user to your friend list?", comment: ""), preferredStyle: .alert)
+        let addAction = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (UIAlertAction) in
             // Send a request
             Constants.refs.databaseUsers.child("/\((user?.id!)!)/requests/\((Auth.auth().currentUser?.uid)!)").updateChildValues(["name": (Auth.auth().currentUser?.displayName)!])
             sender.isHidden = true
-            let announ = UIAlertController(title: "Add friend", message: "You sent add friend request successfully", preferredStyle: .alert)
+            let announ = UIAlertController(title: NSLocalizedString("Add friend", comment: ""), message: NSLocalizedString("You sent add friend request successfully", comment: ""), preferredStyle: .alert)
             self.present(announ, animated: true, completion: nil)
             let when = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: when, execute: {
                 announ.dismiss(animated: true, completion: nil)
             })
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         confirmAlert.addAction(addAction)
         confirmAlert.addAction(cancelAction)
         self.present(confirmAlert, animated: true, completion: nil)

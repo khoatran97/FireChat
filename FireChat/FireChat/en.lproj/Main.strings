@@ -1,0 +1,153 @@
+
+/* Class = "UITabBarItem"; title = "Requests"; ObjectID = "1KK-nR-Vkv"; */
+"1KK-nR-Vkv.title" = "Requests";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "2ng-77-IMx"; */
+"2ng-77-IMx.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Friends"; ObjectID = "2ph-qd-n5P"; */
+"2ph-qd-n5P.title" = "Friends";
+
+/* Class = "UILabel"; text = "Group name"; ObjectID = "3JP-lv-bUP"; */
+"3JP-lv-bUP.text" = "Group name";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "3uo-z3-jZe"; */
+"3uo-z3-jZe.normalTitle" = "Login";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "4JC-JE-4iq"; */
+"4JC-JE-4iq.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6rQ-pK-R7k"; */
+"6rQ-pK-R7k.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "7Dz-YS-7IX"; */
+"7Dz-YS-7IX.title" = "Edit";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "8yp-gp-T1f"; */
+"8yp-gp-T1f.text" = "User Name";
+
+/* Class = "UIViewController"; title = "Conversations"; ObjectID = "AQN-QT-4Wn"; */
+"AQN-QT-4Wn.title" = "Conversations";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Bku-ns-TdO"; */
+"Bku-ns-TdO.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Group Name"; ObjectID = "CF6-GR-Mqv"; */
+"CF6-GR-Mqv.placeholder" = "Group Name";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ebx-x4-ylg"; */
+"Ebx-x4-ylg.text" = "Label";
+
+/* Class = "UIViewController"; title = "Settings"; ObjectID = "HEH-6G-RqN"; */
+"HEH-6G-RqN.title" = "Settings";
+
+/* Class = "UINavigationItem"; title = "Conversations"; ObjectID = "I9A-cr-L4k"; */
+"I9A-cr-L4k.title" = "Conversations";
+
+/* Class = "UITableViewController"; title = "Requests"; ObjectID = "IUw-4o-fFQ"; */
+"IUw-4o-fFQ.title" = "Requests";
+
+/* Class = "UISegmentedControl"; JQC-v9-2vc.segmentTitles[0] = "Login"; ObjectID = "JQC-v9-2vc"; */
+"JQC-v9-2vc.segmentTitles[0]" = "Login";
+
+/* Class = "UISegmentedControl"; JQC-v9-2vc.segmentTitles[1] = "Register"; ObjectID = "JQC-v9-2vc"; */
+"JQC-v9-2vc.segmentTitles[1]" = "Register";
+
+/* Class = "UITabBarItem"; title = "Conversations"; ObjectID = "MVA-Xu-Skr"; */
+"MVA-Xu-Skr.title" = "Conversations";
+
+/* Class = "UIButton"; normalTitle = "English"; ObjectID = "MZH-QD-2Ky"; */
+"MZH-QD-2Ky.normalTitle" = "English";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "MaR-aC-rE2"; */
+"MaR-aC-rE2.placeholder" = "Password";
+
+/* Class = "UITableViewController"; title = "Blacklist"; ObjectID = "WVr-9h-jaB"; */
+"WVr-9h-jaB.title" = "Blacklist";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "X3Z-vk-gxj"; */
+"X3Z-vk-gxj.title" = "Root View Controller";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "Yum-ft-vhU"; */
+"Yum-ft-vhU.title" = "Setting";
+
+/* Class = "UITableViewController"; title = "All Users"; ObjectID = "ZFA-AN-hPT"; */
+"ZFA-AN-hPT.title" = "All Users";
+
+/* Class = "UIViewController"; title = "My QR"; ObjectID = "ZfA-c5-208"; */
+"ZfA-c5-208.title" = "My QR";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ap0-kT-Q6t"; */
+"ap0-kT-Q6t.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bAB-tb-aQ5"; */
+"bAB-tb-aQ5.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "blv-Vf-yd9"; */
+"blv-Vf-yd9.placeholder" = "Name";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "cAr-ae-zYn"; */
+"cAr-ae-zYn.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "car-BU-ONe"; */
+"car-BU-ONe.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dRP-1J-ES6"; */
+"dRP-1J-ES6.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Tiếng Việt"; ObjectID = "eHx-F3-Bwt"; */
+"eHx-F3-Bwt.normalTitle" = "Tiếng Việt";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eO0-Cf-wlA"; */
+"eO0-Cf-wlA.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "edT-Pc-2xg"; */
+"edT-Pc-2xg.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "fPn-P7-pX3"; */
+"fPn-P7-pX3.placeholder" = "Email";
+
+/* Class = "UITextField"; placeholder = "Add member to group"; ObjectID = "i95-ku-mpK"; */
+"i95-ku-mpK.placeholder" = "Add member to group";
+
+/* Class = "UITabBarItem"; title = "Group"; ObjectID = "iIi-Ih-GU5"; */
+"iIi-Ih-GU5.title" = "Group";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "iPE-g0-jpX"; */
+"iPE-g0-jpX.placeholder" = "Email";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "k37-gZ-NJn"; */
+"k37-gZ-NJn.normalTitle" = "Forgot Password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "m4r-uY-eRq"; */
+"m4r-uY-eRq.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Friends"; ObjectID = "oIo-ZV-2xj"; */
+"oIo-ZV-2xj.title" = "Friends";
+
+/* Class = "UIButton"; normalTitle = "Français"; ObjectID = "r4a-bZ-gYW"; */
+"r4a-bZ-gYW.normalTitle" = "Français";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sdT-ny-kK6"; */
+"sdT-ny-kK6.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "t8f-PH-Ytk"; */
+"t8f-PH-Ytk.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "tPl-Qx-xYT"; */
+"tPl-Qx-xYT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ubm-oC-meS"; */
+"ubm-oC-meS.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "vQS-Tq-eX2"; */
+"vQS-Tq-eX2.normalTitle" = "Register";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wKx-Om-XGL"; */
+"wKx-Om-XGL.title" = "Settings";
+
+/* Class = "UIViewController"; title = "Friends"; ObjectID = "zwb-7C-DZ2"; */
+"zwb-7C-DZ2.title" = "Friends";
+
+/* Class = "UITabBarItem"; title = "Requests"; ObjectID = "zxN-TK-trz"; */
+"zxN-TK-trz.title" = "Requests";

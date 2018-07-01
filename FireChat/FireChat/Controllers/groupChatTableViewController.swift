@@ -22,6 +22,10 @@ class groupChatTableViewController: UITableViewController {
         fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     //Init
     func fetchData() {
         groupRef.observe(DataEventType.childAdded, with: { (snapshot) in

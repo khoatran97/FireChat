@@ -64,6 +64,19 @@ class ChatGroupViewController: JSQMessagesViewController {
         return Messages[indexPath.row].senderId == self.senderId ? self.outgoingBubble : self.incomingBubble
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let message = Messages[indexPath.row]
+        let messageUsername = message.senderDisplayName
+        print(messageUsername)
+        
+        return NSAttributedString(string: messageUsername!)
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 15
+    }
+    
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "userAvatar"), diameter: 30)
     }

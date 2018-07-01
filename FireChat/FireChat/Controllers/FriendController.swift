@@ -189,11 +189,16 @@ extension FriendController: UITableViewDelegate, UITableViewDataSource {
             let confirmAlert = UIAlertController(title: "Delete friend", message: "Do you want to unfriend?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
                 Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/friends/\(self.Friends[indexPath.row].id!)").removeValue()
+                Constants.refs.databaseUsers.child("/\(self.Friends[indexPath.row].id!)/friends/\((Auth.auth().currentUser?.uid)!)").removeValue()
+                
+                self.Friends.remove(at: indexPath.row)
+                tableView.reloadData()
             })
             let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            confirmAlert.addAction(yesAction)
+            confirmAlert.addAction(noAction)
+            
+            self.present(confirmAlert, animated: true, completion: nil)
         }
-        
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        tableView.reloadData()
     }
 }

@@ -173,6 +173,10 @@ class AllUsersController: UITableViewController {
             sender.isHidden = true
             let announ = UIAlertController(title: "Add friend", message: "You sent add friend request successfully", preferredStyle: .alert)
             self.present(announ, animated: true, completion: nil)
+            let when = DispatchTime.now() + 2
+            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                announ.dismiss(animated: true, completion: nil)
+            })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         confirmAlert.addAction(addAction)

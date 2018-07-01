@@ -103,9 +103,9 @@ class LoginController: UIViewController {
             let uid = user?.user.uid
             
             let imageName = NSUUID().uuidString;
-            let storeRef = Storage.storage().reference().child("\(imageName).png")
+            let storeRef = Storage.storage().reference().child("\(imageName).jpeg")
             
-            if let uploadData = UIImagePNGRepresentation(self.img_User.image!) {
+            if let uploadData = UIImageJPEGRepresentation(self.img_User.image!, 0) {
                 storeRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
                     
                     if err != nil {

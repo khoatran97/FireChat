@@ -694,7 +694,7 @@
                         <viewLayoutGuide key="safeArea" id="Obc-ah-f1o"/>
                     </view>
                     <navigationItem key="navigationItem" id="oIo-ZV-2xj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="7Dz-YS-7IX">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="7Dz-YS-7IX">
                             <connections>
                                 <action selector="editButton_TouchUpInside:" destination="zwb-7C-DZ2" id="izb-6f-C2J"/>
                             </connections>

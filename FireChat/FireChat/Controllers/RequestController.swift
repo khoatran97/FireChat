@@ -60,31 +60,36 @@ class RequestController: UITableViewController {
         cell.idLabel.text = Request[indexPath.row].id!
         cell.acceptButton.tag = indexPath.row
         cell.acceptButton.addTarget(self, action: #selector(Accept(sender:)), for: .touchUpInside)
+        cell.rejectButton.addTarget(self, action: #selector(Reject(sender:)), for: .touchUpInside)
         
-        let imageUrl = Constants.refs.databaseUsers.child("/\(Request[indexPath.row].id!)").value(forKey: "profileImageUrl") as? String
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
-        if let imageUrl = imageUrl {
-            let storage = Storage.storage()
-            let ref = storage.reference(forURL: imageUrl as String)
-            
-            // Download the avatar from firebase storage
-            ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
-                if (error != nil) {
-                    print("Can not load avatar. Error: \(error!)")
-                    dispatchGroup.leave()
+        Constants.refs.databaseUsers.child("/\(Request[indexPath.row].id!)/profileImageUrl").observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.exists() {
+                print(snapshot.value as! String)
+                if let imageUrl = snapshot.value {
+                    let storage = Storage.storage()
+                    let ref = storage.reference(forURL: imageUrl as! String)
+                    
+                    // Download the avatar from firebase storage
+                    ref.getData(maxSize: 5*1024*1024, completion: { (data, error) in
+                        if (error != nil) {
+                            print("Can not load avatar. Error: \(error!)")
+                            dispatchGroup.leave()
+                        }
+                        else {
+                            cell.avatarImage.image = UIImage(data: data!)
+                            cell.avatarImage.layer.cornerRadius = cell.avatarImage.bounds.width / 2
+                            cell.avatarImage.layer.masksToBounds = true
+                            dispatchGroup.leave()
+                        }
+                    })
                 }
                 else {
-                    cell.avatarImage.image = UIImage(data: data!)
-                    cell.avatarImage.layer.cornerRadius = cell.avatarImage.bounds.width / 2
-                    cell.avatarImage.layer.masksToBounds = true
+                    print("Can not load avatar")
                     dispatchGroup.leave()
                 }
-            })
-        }
-        else {
-            print("Can not load avatar")
-            dispatchGroup.leave()
+            }
         }
         
         // Wait until the observe finishes

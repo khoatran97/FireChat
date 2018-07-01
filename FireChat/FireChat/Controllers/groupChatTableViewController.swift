@@ -13,6 +13,7 @@ class groupChatTableViewController: UITableViewController {
     
     var Groups: [Group] = []
     private lazy var groupRef = Database.database().reference().child("Group")
+    var groupDelegate: GroupDelegate? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +22,16 @@ class groupChatTableViewController: UITableViewController {
         fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     //Init
     func fetchData() {
         groupRef.observe(DataEventType.childAdded, with: { (snapshot) in
             let group = snapshot.value as! Dictionary<String, AnyObject>
             
-            guard let id = group["id"] as! String?, let name = group["name"] as! String?, let imageUrl = group["imageUrl"] as! String?, let imageId = group["imageId"] as! String?, let members = group["members"] as! [String]? else {
+            guard let id = group["id"] as! String?, let name = group["name"] as! String?, let imageUrl = group["imageUrl"] as! String?, let imageId = group["imageId"] as! String?, let members = group["members"] as! [String]?, let conversationId = group["conversationId"] as! String? else {
                 return
             }
             
@@ -36,6 +41,7 @@ class groupChatTableViewController: UITableViewController {
             groups.imageId = imageId
             groups.imageUrl = imageUrl
             groups.members = members
+            groups.conversationId = conversationId
             
             for member in members {
                 if member == Auth.auth().currentUser?.uid {
@@ -100,25 +106,26 @@ class groupChatTableViewController: UITableViewController {
                 dispatchGroup.leave()
             }
         }
-        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         self.performSegue(withIdentifier: "segueToChatGroupVC", sender: self)
+        groupDelegate?.setChatGroup(group: Groups[indexPath.row])
     }
 
-    
-    
-    
-    /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == nil) {
+            return;
+        }
+        if (segue.identifier! == "segueToChatGroupVC") {
+            var chatGroup = segue.destination as! ChatGroupViewController
+            self.groupDelegate = chatGroup
+        }
     }
-    */
+
 
 }

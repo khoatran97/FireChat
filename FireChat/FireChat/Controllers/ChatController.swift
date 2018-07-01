@@ -105,10 +105,12 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             let img = JSQPhotoMediaItem(image: pic)
             //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: img))
             sendMedia(image: pic, video: nil, senderID: self.senderId, senderName: senderDisplayName)
+            self.collectionView.reloadData()
         }else if let vid = info[UIImagePickerControllerMediaURL] as? URL{
             let video =  JSQVideoMediaItem(fileURL: vid, isReadyToPlay: true)
             sendMedia(image: nil, video: vid, senderID: self.senderId, senderName: self.senderDisplayName)
             //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
+            self.collectionView.reloadData()
         }
         self.dismiss(animated: true, completion: nil)
         collectionView.reloadData()
@@ -280,6 +282,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                 let videoURL = chatData["videoURL"] as String!
                 if imgURL != nil{
                     let url = URL(string: imgURL!)
+                    let temp = JSQPhotoMediaItem(image: #imageLiteral(resourceName: "temp_img"))
+                    var newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: temp)
+                    let index = self.Messages.count
+                    self.Messages.append(newMessage!)
+                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
                     URLSession.shared.dataTask(with: url!, completionHandler: { (data: Data?, res: URLResponse?, err) in
                         if err != nil {
                             print(err as Any)
@@ -296,10 +303,11 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
                             }else{
                                 img?.appliesMediaViewMaskAsOutgoing = false
                             }
-                            if let newMessage = JSQMessage(senderId: senderId, displayName: senderName, media: img) {
-                                self.Messages.append(newMessage)
-                                JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-                                self.finishReceivingMessage()
+                            if let newMessage2 = JSQMessage(senderId: senderId, displayName: senderName, media: img){
+                                self.Messages[index] = newMessage2
+                                //JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                                //self.finishReceivingMessage()
+                                self.collectionView.reloadData()
                             }
                         }
                     }).resume()

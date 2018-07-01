@@ -33,11 +33,11 @@ class LoginController: UIViewController {
         //init view
         initView()
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
         //check login
         checkLogin()
-        
     }
-    
     func initView() {
         //navigation bar
         navigationController?.navigationBar.isHidden = true

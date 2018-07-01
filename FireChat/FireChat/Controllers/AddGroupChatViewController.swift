@@ -61,40 +61,59 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
         Members.append((Auth.auth().currentUser?.uid)!)
     }
     
+    
+    //create group
     @objc func handleCreategroup() {
         guard let name = textField_GroupName.text else {
             return
         }
         
+        //alert
+        let alert = UIAlertController(title: "Create Group", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
         let id = NSUUID().uuidString
         let imageID = NSUUID().uuidString
+        let conversationId = NSUUID().uuidString
         
         let databaseRef = Database.database().reference().child("Group").child(id)
         let storeRef = Storage.storage().reference().child("\(imageID).png")
         
-        if let uploadData = UIImagePNGRepresentation(img_AddPhoto.image!) {
-            storeRef.putData(uploadData, metadata: nil) { (metaData, err) in
-                if err != nil {
-                    print(err as Any)
-                    return
-                }
-                print("Save image successfully")
-                storeRef.downloadURL(completion: { (url, err) in
+        if Members.count > 1 && name != "" {
+            if let uploadData = UIImagePNGRepresentation(img_AddPhoto.image!) {
+                storeRef.putData(uploadData, metadata: nil) { (metaData, err) in
                     if err != nil {
                         print(err as Any)
                         return
                     }
-                    
-                    let imageUrl = url?.absoluteString
-                    let values = ["id": id, "name": name, "imageUrl": imageUrl, "imageId": imageID, "members": self.Members] as [String: AnyObject]
-                    databaseRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    print("Save image successfully")
+                    storeRef.downloadURL(completion: { (url, err) in
                         if err != nil {
                             print(err as Any)
                             return
                         }
-                        print("Success")
+                        
+                        let imageUrl = url?.absoluteString
+                        let values = ["id": id, "name": name, "imageUrl": imageUrl, "imageId": imageID, "members": self.Members, "conversationId": conversationId] as [String: AnyObject]
+                        databaseRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                            if err != nil {
+                                print(err as Any)
+                                return
+                            }
+                            alert.message = "Success"
+                            self.present(alert, animated: true, completion: nil)
+                            self.performSegue(withIdentifier: "segueBackToGroupVC", sender: nil)
+                        })
                     })
-                })
+                }
+            }
+        } else {
+            if Members.count < 2 {
+                alert.message = "Number of member must more 2 members"
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                alert.message = "Group name is not empty"
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

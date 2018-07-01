@@ -30,11 +30,13 @@
 		A9BA86A520C2474F00F34166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9BA86A320C2474F00F34166 /* Main.storyboard */; };
 		A9BA86AA20C2475000F34166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9BA86A820C2475000F34166 /* LaunchScreen.storyboard */; };
 		A9CDEFEE20C269F100D0E8F0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A9CDEFED20C269F000D0E8F0 /* Podfile */; };
+		A9F24E2B20E8BB3800BCEB6C /* BlacklistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F24E2A20E8BB3800BCEB6C /* BlacklistController.swift */; };
+		A9F24E2D20E8BB4F00BCEB6C /* BlacklistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F24E2C20E8BB4F00BCEB6C /* BlacklistCell.swift */; };
+		C043F39B20C44B29006BA9CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */; };
 		C082812420E78A590000509E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082812320E78A590000509E /* Group.swift */; };
 		C082812620E7EB130000509E /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082812520E7EB130000509E /* ChatGroupViewController.swift */; };
 		C08A622020CA63C8002F676C /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A621F20CA63C8002F676C /* ProfileController.swift */; };
 		C08A622220CA65DC002F676C /* CustomProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A622120CA65DC002F676C /* CustomProfileCell.swift */; };
-		C0D90B9E20E8AA650035C314 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0D90B9D20E8AA650035C314 /* GoogleService-Info.plist */; };
 		C0DC045620E730BE00E8AFB9 /* groupChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045520E730BE00E8AFB9 /* groupChatTableViewController.swift */; };
 		C0DC045820E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045720E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift */; };
 		C0DC045A20E73B0300E8AFB9 /* AddGroupChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045920E73B0300E8AFB9 /* AddGroupChatViewController.swift */; };
@@ -72,11 +74,13 @@
 		A9BA86AB20C2475000F34166 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9CDEFEC20C267EC00D0E8F0 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A9CDEFED20C269F000D0E8F0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		A9F24E2A20E8BB3800BCEB6C /* BlacklistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlacklistController.swift; sourceTree = "<group>"; };
+		A9F24E2C20E8BB4F00BCEB6C /* BlacklistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlacklistCell.swift; sourceTree = "<group>"; };
+		C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C082812320E78A590000509E /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		C082812520E7EB130000509E /* ChatGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		C08A621F20CA63C8002F676C /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		C08A622120CA65DC002F676C /* CustomProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileCell.swift; sourceTree = "<group>"; };
-		C0D90B9D20E8AA650035C314 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0DC045520E730BE00E8AFB9 /* groupChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = groupChatTableViewController.swift; sourceTree = "<group>"; };
 		C0DC045720E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGroupChatTableViewCell.swift; sourceTree = "<group>"; };
 		C0DC045920E73B0300E8AFB9 /* AddGroupChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupChatViewController.swift; sourceTree = "<group>"; };
@@ -160,9 +164,9 @@
 				C0F5140220C7CEC700A57B75 /* Models */,
 				C0F5140120C7CEB700A57B75 /* Controllers */,
 				A9BA869F20C2474E00F34166 /* AppDelegate.swift */,
-				C0D90B9D20E8AA650035C314 /* GoogleService-Info.plist */,
 				A9BA86A320C2474F00F34166 /* Main.storyboard */,
 				A9BA86A820C2475000F34166 /* LaunchScreen.storyboard */,
+				C043F39A20C44B29006BA9CA /* GoogleService-Info.plist */,
 				A9BA86AB20C2475000F34166 /* Info.plist */,
 			);
 			path = FireChat;
@@ -189,7 +193,9 @@
 				A96088FC20E72E7E00FAAFB0 /* AllUsersCell.swift */,
 				A96088FE20E7341200FAAFB0 /* AllUsersController.swift */,
 				A91900A120E79899009744F9 /* RequestCell.swift */,
+				A9F24E2C20E8BB4F00BCEB6C /* BlacklistCell.swift */,
 				A91900A320E7993F009744F9 /* RequestController.swift */,
+				A9F24E2A20E8BB3800BCEB6C /* BlacklistController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -268,8 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9BA86AA20C2475000F34166 /* LaunchScreen.storyboard in Resources */,
+				C043F39B20C44B29006BA9CA /* GoogleService-Info.plist in Resources */,
 				A9CDEFEE20C269F100D0E8F0 /* Podfile in Resources */,
-				C0D90B9E20E8AA650035C314 /* GoogleService-Info.plist in Resources */,
 				A9BA86A520C2474F00F34166 /* Main.storyboard in Resources */,
 				A95705D420DFFAA40069DBB5 /* Assets.xcassets in Resources */,
 			);
@@ -342,6 +348,7 @@
 				A96088FD20E72E7E00FAAFB0 /* AllUsersCell.swift in Sources */,
 				A90E58F620C9296300C2DEBE /* Friend.swift in Sources */,
 				A91900A720E7A582009744F9 /* CheckHelper.swift in Sources */,
+				A9F24E2D20E8BB4F00BCEB6C /* BlacklistCell.swift in Sources */,
 				A90E58F020C8EB5F00C2DEBE /* Conversation.swift in Sources */,
 				A90E58F220C9029300C2DEBE /* ConversationCell.swift in Sources */,
 				C082812620E7EB130000509E /* ChatGroupViewController.swift in Sources */,
@@ -354,6 +361,7 @@
 				A90E58F420C9282500C2DEBE /* FriendController.swift in Sources */,
 				C0DC045C20E747ED00E8AFB9 /* customListFriendCell.swift in Sources */,
 				A91900A220E79899009744F9 /* RequestCell.swift in Sources */,
+				A9F24E2B20E8BB3800BCEB6C /* BlacklistController.swift in Sources */,
 				A91900A420E7993F009744F9 /* RequestController.swift in Sources */,
 				C0F5140420C7D94A00A57B75 /* User.swift in Sources */,
 				A91FF99120C824020006CF37 /* Constants.swift in Sources */,

@@ -105,10 +105,12 @@ class ChatController: JSQMessagesViewController, UIImagePickerControllerDelegate
             let img = JSQPhotoMediaItem(image: pic)
             //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: img))
             sendMedia(image: pic, video: nil, senderID: self.senderId, senderName: senderDisplayName)
+            self.collectionView.reloadData()
         }else if let vid = info[UIImagePickerControllerMediaURL] as? URL{
             let video =  JSQVideoMediaItem(fileURL: vid, isReadyToPlay: true)
             sendMedia(image: nil, video: vid, senderID: self.senderId, senderName: self.senderDisplayName)
             //self.Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: video))
+            self.collectionView.reloadData()
         }
         self.dismiss(animated: true, completion: nil)
         collectionView.reloadData()

@@ -68,7 +68,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,12 +98,15 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             
             break
         case 1:
-            print(1)
+            self.performSegue(withIdentifier: "segueToBlacklist", sender: self)
             break
         case 2:
             print(2)
             break
-        case 3: //change password
+        case 3:
+            print(3)
+            break
+        case 4: //change password
             print("Change password")
             let alert = UIAlertController(title: "Password", message: "Do you want to change password", preferredStyle: UIAlertControllerStyle.alert)
             alert.addTextField { (textfield) in
@@ -168,7 +171,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
             break
-        case 4: //logout
+        case 5: //logout
             //success
             let alert = UIAlertController(title: "Logout", message: "Do you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -199,20 +202,25 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.labelCell.text = self.user.name
             break
         case 1:
+            cell.imageCell.image = #imageLiteral(resourceName: "blacklist").withRenderingMode(.alwaysOriginal)
+            cell.labelCell.text = "Blacklist"
+            break
+        case 2:
             cell.imageCell.image = #imageLiteral(resourceName: "img_help").withRenderingMode(.alwaysOriginal)
             cell.labelCell.text = "Help"
             break
-        case 2:
+        case 3:
             cell.imageCell.image = #imageLiteral(resourceName: "img_info").withRenderingMode(.alwaysOriginal)
             cell.labelCell.text = "Privacy"
             break
         case 4:
+            cell.imageCell.image = #imageLiteral(resourceName: "key").withRenderingMode(.alwaysOriginal)
+            cell.labelCell.text = "Change password"
+            break
+        case 5:
             cell.imageCell.image = #imageLiteral(resourceName: "img_logout").withRenderingMode(.alwaysOriginal)
             cell.labelCell.text = "Logout"
             break
-        case 3:
-            cell.imageCell.image = #imageLiteral(resourceName: "key").withRenderingMode(.alwaysOriginal)
-            cell.labelCell.text = "Change password"
         default:
             break
         }

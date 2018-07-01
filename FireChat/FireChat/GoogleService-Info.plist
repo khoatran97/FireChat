@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>960493204795-kbdbk1is0cp77c9k4rtve9mugaq86baj.apps.googleusercontent.com</string>
+	<string>637848036169-44a7ds5kdlacjuv9mn4a8f3f180frcgc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.960493204795-kbdbk1is0cp77c9k4rtve9mugaq86baj</string>
+	<string>com.googleusercontent.apps.637848036169-44a7ds5kdlacjuv9mn4a8f3f180frcgc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBL9YFzM1sYGaV78huaeS8aHvL81OhyY5Y</string>
+	<string>AIzaSyAljZWk1ith7n2MkPkMB9R30C8XXwmQuAM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>960493204795</string>
+	<string>637848036169</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.hkn.FireChat</string>
 	<key>PROJECT_ID</key>
-	<string>ios-finalproject-ed16a</string>
+	<string>ios-finalproject2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ios-finalproject-ed16a.appspot.com</string>
+	<string>ios-finalproject2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:960493204795:ios:5def2539afa3b8d9</string>
+	<string>1:637848036169:ios:5def2539afa3b8d9</string>
 	<key>DATABASE_URL</key>
-	<string>https://ios-finalproject-ed16a.firebaseio.com</string>
+	<string>https://ios-finalproject2.firebaseio.com</string>
 </dict>
 </plist>

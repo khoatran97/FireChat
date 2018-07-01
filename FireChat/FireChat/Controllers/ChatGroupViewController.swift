@@ -17,6 +17,14 @@ class ChatGroupViewController: JSQMessagesViewController {
     private lazy var chatReference: DatabaseReference? = nil
     private lazy var userRef = Database.database().reference().child("Users")
     var group: Group? = nil
+    
+    lazy var outgoingBubble: JSQMessagesBubbleImage = {
+        return JSQMessagesBubbleImageFactory()!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+    }()
+    
+    lazy var incomingBubble: JSQMessagesBubbleImage = {
+        return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +61,7 @@ class ChatGroupViewController: JSQMessagesViewController {
     // START COLLECTION
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let bubbleFactory = JSQMessagesBubbleImageFactory()
-    
-        return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.blue)
+        return Messages[indexPath.row].senderId == self.senderId ? self.outgoingBubble : self.incomingBubble
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
@@ -91,7 +97,7 @@ class ChatGroupViewController: JSQMessagesViewController {
         let newMessage = self.chatReference?.childByAutoId()
         let message = ["senderId": self.senderId, "senderName": self.senderDisplayName, "message": text]
         newMessage?.setValue(message)
-        Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
+        //Messages.append(JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text: text))
         collectionView.reloadData()
         self.finishSendingMessage()
     }

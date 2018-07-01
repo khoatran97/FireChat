@@ -81,12 +81,12 @@ class FriendController: UIViewController {
     @IBAction func editButton_TouchUpInside(_ sender: UIBarButtonItem) {
         if self.friendTableView.isEditing {
             self.friendTableView.setEditing(false, animated: true)
-            sender.title = "Edit"
+            sender.title = NSLocalizedString("Edit", comment: "")
             //sender.image = UIImage(named: "edit")
         }
         else {
             self.friendTableView.setEditing(true, animated: true)
-            sender.title = "Done"
+            sender.title = NSLocalizedString("Done", comment: "")
             //sender.image = UIImage(named: "done")
         }
     }
@@ -186,15 +186,15 @@ extension FriendController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            let confirmAlert = UIAlertController(title: "Delete friend", message: "Do you want to unfriend?", preferredStyle: .alert)
-            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (UIAlertAction) in
+            let confirmAlert = UIAlertController(title: NSLocalizedString("Delete friend", comment: ""), message: NSLocalizedString("Do you want to unfriend?", comment: ""), preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { (UIAlertAction) in
                 Constants.refs.databaseUsers.child("/\((Auth.auth().currentUser?.uid)!)/friends/\(self.Friends[indexPath.row].id!)").removeValue()
                 Constants.refs.databaseUsers.child("/\(self.Friends[indexPath.row].id!)/friends/\((Auth.auth().currentUser?.uid)!)").removeValue()
                 
                 self.Friends.remove(at: indexPath.row)
                 tableView.reloadData()
             })
-            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            let noAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil)
             confirmAlert.addAction(yesAction)
             confirmAlert.addAction(noAction)
             

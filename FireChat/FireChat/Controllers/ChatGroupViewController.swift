@@ -58,6 +58,21 @@ class ChatGroupViewController: JSQMessagesViewController, UIImagePickerControlle
 
         title = group?.name
         chatReference = Database.database().reference().child("GroupConversation").child((group?.conversationId!)!)
+        
+        //navigation bar
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "info-1"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleRightBarButton))
+    }
+    
+    //handle right bar button item on navigation bar
+    @objc func handleRightBarButton() {
+        self.performSegue(withIdentifier: "segueToInfoGroupVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToInfoGroupVC" {
+            let groupProfile = segue.destination as! groupProfileController
+            groupProfile.group = self.group
+        }
     }
     
     

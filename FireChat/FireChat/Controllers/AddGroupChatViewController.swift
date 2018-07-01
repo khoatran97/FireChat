@@ -102,7 +102,6 @@ class AddGroupChatViewController: UIViewController, UIImagePickerControllerDeleg
                             }
                             alert.message = "Success"
                             self.present(alert, animated: true, completion: nil)
-                            self.performSegue(withIdentifier: "segueBackToGroupVC", sender: nil)
                         })
                     })
                 }

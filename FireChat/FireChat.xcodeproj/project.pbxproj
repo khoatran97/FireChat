@@ -37,6 +37,7 @@
 		C082812620E7EB130000509E /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082812520E7EB130000509E /* ChatGroupViewController.swift */; };
 		C08A622020CA63C8002F676C /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A621F20CA63C8002F676C /* ProfileController.swift */; };
 		C08A622220CA65DC002F676C /* CustomProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A622120CA65DC002F676C /* CustomProfileCell.swift */; };
+		C0A51ACD20E9112500A41988 /* groupProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A51ACC20E9112500A41988 /* groupProfileController.swift */; };
 		C0DC045620E730BE00E8AFB9 /* groupChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045520E730BE00E8AFB9 /* groupChatTableViewController.swift */; };
 		C0DC045820E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045720E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift */; };
 		C0DC045A20E73B0300E8AFB9 /* AddGroupChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DC045920E73B0300E8AFB9 /* AddGroupChatViewController.swift */; };
@@ -81,6 +82,7 @@
 		C082812520E7EB130000509E /* ChatGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		C08A621F20CA63C8002F676C /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		C08A622120CA65DC002F676C /* CustomProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileCell.swift; sourceTree = "<group>"; };
+		C0A51ACC20E9112500A41988 /* groupProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = groupProfileController.swift; sourceTree = "<group>"; };
 		C0DC045520E730BE00E8AFB9 /* groupChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = groupChatTableViewController.swift; sourceTree = "<group>"; };
 		C0DC045720E7311100E8AFB9 /* CustomGroupChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGroupChatTableViewCell.swift; sourceTree = "<group>"; };
 		C0DC045920E73B0300E8AFB9 /* AddGroupChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupChatViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				A9F24E2C20E8BB4F00BCEB6C /* BlacklistCell.swift */,
 				A91900A320E7993F009744F9 /* RequestController.swift */,
 				A9F24E2A20E8BB3800BCEB6C /* BlacklistController.swift */,
+				C0A51ACC20E9112500A41988 /* groupProfileController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				A9BA86A220C2474E00F34166 /* LoginController.swift in Sources */,
 				A90E58F820C92B0C00C2DEBE /* UserCell.swift in Sources */,
 				A91FF98F20C823350006CF37 /* ConversationController.swift in Sources */,
+				C0A51ACD20E9112500A41988 /* groupProfileController.swift in Sources */,
 				A90E58EE20C8E91800C2DEBE /* ConversationProtocol.swift in Sources */,
 				A99910B620DCACB000F42F2D /* QRController.swift in Sources */,
 				C0DC045620E730BE00E8AFB9 /* groupChatTableViewController.swift in Sources */,

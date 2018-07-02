@@ -86,6 +86,7 @@ class ConversationController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: when, execute: {
                 alert.dismiss(animated: true, completion: nil)
             })
+            self.performSegue(withIdentifier: "segueToLoginVC", sender: self)
             
         } catch {
             print("Logout failed")

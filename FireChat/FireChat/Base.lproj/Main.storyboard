@@ -203,11 +203,11 @@
                                     <action selector="frButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2gk-xE-VDr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k37-gZ-NJn">
-                                <rect key="frame" x="212" y="406" width="115" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k37-gZ-NJn">
+                                <rect key="frame" x="127" y="406" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ye0-6d-B6q"/>
-                                    <constraint firstAttribute="width" constant="115" id="diC-7J-iip"/>
+                                    <constraint firstAttribute="width" constant="200" id="diC-7J-iip"/>
                                 </constraints>
                                 <state key="normal" title="Forgot Password">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1456,6 +1456,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="yac-JE-R9N"/>
         <segue reference="LmI-dm-WDE"/>
-        <segue reference="gaK-cW-x0M"/>
+        <segue reference="Pev-RA-iiJ"/>
     </inferredMetricsTieBreakers>
 </document>

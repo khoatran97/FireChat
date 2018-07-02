@@ -18,6 +18,7 @@ class QRController: UIViewController {
 
         var id = Auth.auth().currentUser?.uid
         self.qrImageView.image = self.generateQR(from: id!)
+        self.tabBarController?.tabBar.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {

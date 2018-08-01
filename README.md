@@ -8,7 +8,7 @@ The final project for IOS subject at HCMUS 2017-2018
 
 ### Team Gmail (for using Firebase)
 - Email: ios.hknteam@gmail.com
-- Password: khangkhoanam
+- Password: ************
 
 ### After cloning
 Install CocoaPods\
